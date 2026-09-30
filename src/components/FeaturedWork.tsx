@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ArrowUpRight, ExternalLink, ShieldCheck, CheckCircle2, Smartphone, Monitor } from "lucide-react";
+import { ArrowUpRight, ExternalLink, ShieldCheck, CheckCircle2, Smartphone, Monitor, Maximize2 } from "lucide-react";
 import { GithubIcon } from "./Icons";
 import { LocaleContent, ProjectData } from "../types";
+import { ImageModal } from "./ImageModal";
 
 interface FeaturedWorkProps {
   content: LocaleContent["work"];
@@ -60,6 +61,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels }) => {
   const [activeScreenshotIdx, setActiveScreenshotIdx] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const activeScreenshot = project.screenshots[activeScreenshotIdx] || project.screenshots[0];
   const isPrimary = index === 0;
 
@@ -113,18 +115,35 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
                   <Monitor size={14} aria-hidden="true" />
                 )}
               </div>
-
             </div>
 
-            {/* Media Canvas */}
-            <div className={`mockup-viewport ${activeScreenshot?.type === "mobile" ? "viewport-mobile" : "viewport-desktop"}`}>
+            {/* Media Canvas with Click to Expand */}
+            <div
+              className={`mockup-viewport ${activeScreenshot?.type === "mobile" ? "viewport-mobile" : "viewport-desktop"} clickable-mockup`}
+              onClick={() => activeScreenshot && setLightboxOpen(true)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if ((e.key === "Enter" || e.key === " ") && activeScreenshot) {
+                  e.preventDefault();
+                  setLightboxOpen(true);
+                }
+              }}
+              title="Click to view full screenshot in high resolution"
+            >
               {activeScreenshot ? (
-                <img
-                  src={activeScreenshot.url}
-                  alt={activeScreenshot.alt}
-                  className="mockup-image"
-                  loading="lazy"
-                />
+                <>
+                  <img
+                    src={activeScreenshot.url}
+                    alt={activeScreenshot.alt}
+                    className="mockup-image"
+                    loading="lazy"
+                  />
+                  <div className="mockup-expand-hint">
+                    <Maximize2 size={16} aria-hidden="true" />
+                    <span>Expand Full View</span>
+                  </div>
+                </>
               ) : (
                 <div className="mockup-fallback">
                   <span>{project.name}</span>
@@ -255,6 +274,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      <ImageModal
+        isOpen={lightboxOpen}
+        imageUrl={activeScreenshot?.url || null}
+        imageAlt={activeScreenshot?.alt || project.name}
+        caption={activeScreenshot?.caption}
+        title={`${project.name} — Screenshot 0${activeScreenshotIdx + 1}`}
+        onClose={() => setLightboxOpen(false)}
+      />
     </article>
   );
 };
