@@ -23,6 +23,14 @@ interface ResponseLike {
 // In-memory rate limiting map: IP -> timestamp
 const ipRateLimitMap = new Map<string, number>();
 
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
 // Periodic cleanup of stale rate-limit entries
 function cleanupRateLimitMap() {
   const cutoff = Date.now() - 5 * 60 * 1000;
@@ -122,9 +130,16 @@ Message:
 ${message}
 
 ---
-Sent via Eduardo de la Cruz Portfolio Contact Form
+Sent via Eduardo De La Cruz Portfolio Contact Form
 Client IP: ${clientIp}
 Timestamp: ${new Date().toISOString()}`;
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeCompany = escapeHtml(company || "—");
+    const safeNeed = escapeHtml(need || "—");
+    const safeBudget = escapeHtml(budget || "—");
+    const safeMessage = escapeHtml(message);
 
     const emailHtml = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; color: #141f1a; border: 1px solid #dcded9; border-radius: 8px;">
@@ -134,28 +149,28 @@ Timestamp: ${new Date().toISOString()}`;
         <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
           <tr>
             <td style="padding: 8px 0; font-weight: bold; width: 140px; color: #6e7f77;">Client Name:</td>
-            <td style="padding: 8px 0; color: #141f1a;">${name}</td>
+            <td style="padding: 8px 0; color: #141f1a;">${safeName}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; color: #6e7f77;">Email Address:</td>
-            <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #b85d3b; text-decoration: none;">${email}</a></td>
+            <td style="padding: 8px 0;"><a href="mailto:${safeEmail}" style="color: #b85d3b; text-decoration: none;">${safeEmail}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; color: #6e7f77;">Company:</td>
-            <td style="padding: 8px 0; color: #141f1a;">${company || "—"}</td>
+            <td style="padding: 8px 0; color: #141f1a;">${safeCompany}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; color: #6e7f77;">Project Type:</td>
-            <td style="padding: 8px 0; color: #141f1a;">${need || "—"}</td>
+            <td style="padding: 8px 0; color: #141f1a;">${safeNeed}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; color: #6e7f77;">Budget Range:</td>
-            <td style="padding: 8px 0; color: #141f1a;">${budget || "—"}</td>
+            <td style="padding: 8px 0; color: #141f1a;">${safeBudget}</td>
           </tr>
         </table>
         <div style="background-color: #f7f6f2; padding: 16px; border-radius: 6px; border-left: 3px solid #b85d3b; margin: 20px 0;">
           <h4 style="margin: 0 0 8px 0; color: #141f1a; font-size: 14px;">Project Description:</h4>
-          <p style="margin: 0; white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #33423a;">${message}</p>
+          <p style="margin: 0; white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #33423a;">${safeMessage}</p>
         </div>
         <p style="font-size: 12px; color: #88998f; margin-top: 24px; border-top: 1px solid #e2e4df; padding-top: 12px;">
           Received on ${new Date().toUTCString()} · IP: ${clientIp}
