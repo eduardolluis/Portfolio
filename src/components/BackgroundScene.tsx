@@ -11,6 +11,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     if (!canvas || !THREE) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const compact = window.innerWidth < 700;
     let renderer: any;
     try {
       renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -18,7 +19,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
       return;
     }
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, compact ? 1.35 : 2));
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
     camera.position.z = 8;
@@ -44,19 +45,19 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     group.add(core);
 
     const wire = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.6, 2),
+      new THREE.IcosahedronGeometry(1.6, compact ? 1 : 2),
       new THREE.MeshBasicMaterial({ color: colors.cyan, wireframe: true, transparent: true, opacity: 0.32 }),
     );
     group.add(wire);
 
     const knot = new THREE.Mesh(
-      new THREE.TorusKnotGeometry(2.2, 0.025, 240, 8, 2, 3),
+      new THREE.TorusKnotGeometry(2.2, 0.025, compact ? 120 : 240, compact ? 6 : 8, 2, 3),
       new THREE.MeshBasicMaterial({ color: colors.pink, transparent: true, opacity: 0.85 }),
     );
     group.add(knot);
 
     const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(2.9, 0.012, 8, 160),
+      new THREE.TorusGeometry(2.9, 0.012, 8, compact ? 96 : 160),
       new THREE.MeshBasicMaterial({ color: colors.violet, transparent: true, opacity: 0.7 }),
     );
     ring.rotation.x = Math.PI / 2.4;
@@ -89,7 +90,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     light2.position.set(-5, -2, 5);
     scene.add(light2);
 
-    const count = 1400;
+    const count = compact ? 650 : 1400;
     const positions = new Float32Array(count * 3);
     const particleColors = new Float32Array(count * 3);
     const colorSet = [new THREE.Color(colors.violet), new THREE.Color(colors.cyan), new THREE.Color(colors.pink)];
@@ -144,8 +145,8 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
     const targetFor = (id: string) => {
       if (mobile) {
-        if (id === "home") return { x: 0, y: vh * 0.24, scale: 0.62, opacity: 0.95 };
-        return { x: 0, y: 0, scale: 0.5, opacity: 0.12 };
+        if (id === "home") return { x: 0, y: vh * 0.3, scale: 0.52, opacity: 0.72 };
+        return { x: 0, y: 0, scale: 0.42, opacity: 0.09 };
       }
       switch (id) {
         case "home": return { x: vw * 0.24, y: 0, scale: 1, opacity: 1 };
