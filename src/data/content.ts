@@ -32,6 +32,7 @@ export const site = {
   whatsapp: "https://wa.me/18495191571",
   url: "https://eduardo-portfolio-neon-two.vercel.app/",
   location: "Santo Domingo, Dominican Republic",
+  resume: "/Eduardo_De_La_Cruz_Resume.pdf",
 };
 
 export const content = {
@@ -43,6 +44,7 @@ export const content = {
       roles: ["Full-Stack", "Flutter", "Web"],
       lead: "I build web apps, mobile apps and business software end to end — from databases and APIs to interfaces people can actually use.",
       projects: "View my projects",
+      resume: "Resume",
       contact: "Let's talk",
       scroll: "Scroll",
       availability: "Open to freelance projects, internships, junior software roles and collaborations",
@@ -286,6 +288,7 @@ export const content = {
       roles: ["Full-Stack", "Flutter", "Web"],
       lead: "Construyo aplicaciones web, apps móviles y software para negocios de principio a fin: desde bases de datos y APIs hasta interfaces que la gente realmente puede usar.",
       projects: "Ver mis proyectos",
+      resume: "CV / Resume",
       contact: "Hablemos",
       scroll: "Desliza",
       availability: "Disponible para proyectos freelance, pasantías, roles junior y colaboraciones",

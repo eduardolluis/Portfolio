@@ -329,6 +329,7 @@ function App() {
               </div>
               <div className="cta-row hero-in" style={{ animationDelay: "1.2s" }}>
                 <button className="btn primary magnetic" type="button" onClick={() => scrollTo("projects")}>{t.hero.projects}</button>
+                <a className="btn magnetic resume-btn" href={site.resume} download="Eduardo_De_La_Cruz_Resume.pdf">{t.hero.resume} ↓</a>
                 <button className="btn magnetic" type="button" onClick={() => scrollTo("contact")}>{t.hero.contact}</button>
               </div>
             </div>
@@ -448,6 +449,7 @@ function App() {
                   <a className="btn magnetic" href={site.github} target="_blank" rel="noopener noreferrer">{t.contact.github}</a>
                   <a className="btn magnetic" href={site.linkedin} target="_blank" rel="noopener noreferrer">{t.contact.linkedin}</a>
                   <a className="btn magnetic" href={site.whatsapp} target="_blank" rel="noopener noreferrer">{t.contact.whatsapp}</a>
+                  <a className="btn magnetic resume-btn" href={site.resume} download="Eduardo_De_La_Cruz_Resume.pdf">{t.hero.resume} ↓</a>
                 </div>
               </div>
 

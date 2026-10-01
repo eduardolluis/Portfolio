@@ -10,35 +10,20 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     const THREE = (window as unknown as { THREE?: any }).THREE;
     if (!canvas || !THREE) return;
 
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const compact = window.innerWidth < 700;
-    const network = (
-      navigator as Navigator & { connection?: { saveData?: boolean } }
-    ).connection;
-    const deviceMemory = (navigator as Navigator & { deviceMemory?: number })
-      .deviceMemory;
-    if (
-      network?.saveData ||
-      (compact && deviceMemory !== undefined && deviceMemory <= 2)
-    )
-      return;
+    const network = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+    if (network?.saveData || (compact && deviceMemory !== undefined && deviceMemory <= 2)) return;
 
     let renderer: any;
     try {
-      renderer = new THREE.WebGLRenderer({
-        canvas,
-        alpha: true,
-        antialias: true,
-      });
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     } catch {
       return;
     }
 
-    renderer.setPixelRatio(
-      Math.min(window.devicePixelRatio || 1, compact ? 1.3 : 2),
-    );
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, compact ? 1.3 : 2));
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
     camera.position.z = 8;
@@ -47,11 +32,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     scene.add(group);
 
     const colors = { violet: 0x7c5cff, cyan: 0x22d3ee, pink: 0xff5caa };
-    const colorSet = [
-      new THREE.Color(colors.violet),
-      new THREE.Color(colors.cyan),
-      new THREE.Color(colors.pink),
-    ];
+    const colorSet = [new THREE.Color(colors.violet), new THREE.Color(colors.cyan), new THREE.Color(colors.pink)];
 
     // ---------------------------------------------------------------------
     // Morphing developer object
@@ -65,13 +46,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
       return value - Math.floor(value);
     };
 
-    const setPoint = (
-      buffer: Float32Array,
-      index: number,
-      x: number,
-      y: number,
-      z = 0,
-    ) => {
+    const setPoint = (buffer: Float32Array, index: number, x: number, y: number, z = 0) => {
       const offset = index * 3;
       buffer[offset] = x;
       buffer[offset + 1] = y;
@@ -86,13 +61,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
         const radius = Math.sqrt(Math.max(0, 1 - y * y));
         const theta = golden * i;
         const ripple = 1 + Math.sin(i * 0.19) * 0.055;
-        setPoint(
-          buffer,
-          i,
-          Math.cos(theta) * radius * 1.55 * ripple,
-          y * 1.55 * ripple,
-          Math.sin(theta) * radius * 1.55 * ripple,
-        );
+        setPoint(buffer, i, Math.cos(theta) * radius * 1.55 * ripple, y * 1.55 * ripple, Math.sin(theta) * radius * 1.55 * ripple);
       }
       return buffer;
     };
@@ -133,13 +102,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
           x = -1.23 + rowProgress * lineWidths[row];
           y = 0.52 - row * 0.35;
         }
-        setPoint(
-          buffer,
-          i,
-          x + jitter,
-          y + jitter * 0.35,
-          (seeded(i, 5) - 0.5) * 0.18,
-        );
+        setPoint(buffer, i, x + jitter, y + jitter * 0.35, (seeded(i, 5) - 0.5) * 0.18);
       }
       return buffer;
     };
@@ -183,13 +146,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
           x = -0.58 + rowProgress * (row % 2 === 0 ? 1.16 : 0.82);
           y = 0.65 - row * 0.5;
         }
-        setPoint(
-          buffer,
-          i,
-          x + jitter,
-          y + jitter * 0.25,
-          (seeded(i, 10) - 0.5) * 0.2,
-        );
+        setPoint(buffer, i, x + jitter, y + jitter * 0.25, (seeded(i, 10) - 0.5) * 0.2);
       }
       return buffer;
     };
@@ -223,43 +180,22 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
     const makeCode = () => {
       const buffer = new Float32Array(morphCount * 3);
-      const pointOnSegment = (
-        ax: number,
-        ay: number,
-        bx: number,
-        by: number,
-        p: number,
-      ) => [ax + (bx - ax) * p, ay + (by - ay) * p];
+      const pointOnSegment = (ax: number, ay: number, bx: number, by: number, p: number) => [ax + (bx - ax) * p, ay + (by - ay) * p];
       for (let i = 0; i < morphCount; i += 1) {
         const u = i / morphCount;
         const jitter = (seeded(i, 18) - 0.5) * 0.055;
         let point: number[];
         if (u < 0.25) point = pointOnSegment(-0.55, 1.25, -1.55, 0, u / 0.25);
-        else if (u < 0.5)
-          point = pointOnSegment(-1.55, 0, -0.55, -1.25, (u - 0.25) / 0.25);
-        else if (u < 0.7)
-          point = pointOnSegment(0.38, -1.5, -0.38, 1.5, (u - 0.5) / 0.2);
-        else if (u < 0.85)
-          point = pointOnSegment(0.55, 1.25, 1.55, 0, (u - 0.7) / 0.15);
+        else if (u < 0.5) point = pointOnSegment(-1.55, 0, -0.55, -1.25, (u - 0.25) / 0.25);
+        else if (u < 0.7) point = pointOnSegment(0.38, -1.5, -0.38, 1.5, (u - 0.5) / 0.2);
+        else if (u < 0.85) point = pointOnSegment(0.55, 1.25, 1.55, 0, (u - 0.7) / 0.15);
         else point = pointOnSegment(1.55, 0, 0.55, -1.25, (u - 0.85) / 0.15);
-        setPoint(
-          buffer,
-          i,
-          point[0] + jitter,
-          point[1] + jitter * 0.35,
-          (seeded(i, 20) - 0.5) * 0.22,
-        );
+        setPoint(buffer, i, point[0] + jitter, point[1] + jitter * 0.35, (seeded(i, 20) - 0.5) * 0.22);
       }
       return buffer;
     };
 
-    const morphTargets = [
-      makeOrb(),
-      makeBrowser(),
-      makePhone(),
-      makeDatabase(),
-      makeCode(),
-    ];
+    const morphTargets = [makeOrb(), makeBrowser(), makePhone(), makeDatabase(), makeCode()];
     morphPositions.set(morphTargets[0]);
     for (let i = 0; i < morphCount; i += 1) {
       const c = colorSet[i % colorSet.length];
@@ -272,10 +208,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     const morphPositionAttribute = new THREE.BufferAttribute(morphPositions, 3);
     morphPositionAttribute.setUsage(THREE.DynamicDrawUsage);
     morphGeometry.setAttribute("position", morphPositionAttribute);
-    morphGeometry.setAttribute(
-      "color",
-      new THREE.BufferAttribute(morphColors, 3),
-    );
+    morphGeometry.setAttribute("color", new THREE.BufferAttribute(morphColors, 3));
 
     const morphMaterial = new THREE.PointsMaterial({
       size: compact ? 0.052 : 0.046,
@@ -293,31 +226,19 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     const haloGroup = new THREE.Group();
     const halo1 = new THREE.Mesh(
       new THREE.TorusGeometry(2.45, 0.012, 8, compact ? 88 : 150),
-      new THREE.MeshBasicMaterial({
-        color: colors.violet,
-        transparent: true,
-        opacity: 0.62,
-      }),
+      new THREE.MeshBasicMaterial({ color: colors.violet, transparent: true, opacity: 0.62 }),
     );
     halo1.rotation.x = Math.PI / 2.35;
     halo1.rotation.z = 0.35;
     const halo2 = new THREE.Mesh(
       new THREE.TorusGeometry(2.05, 0.01, 8, compact ? 72 : 120),
-      new THREE.MeshBasicMaterial({
-        color: colors.cyan,
-        transparent: true,
-        opacity: 0.46,
-      }),
+      new THREE.MeshBasicMaterial({ color: colors.cyan, transparent: true, opacity: 0.46 }),
     );
     halo2.rotation.x = Math.PI / 2.75;
     halo2.rotation.y = 0.8;
     const halo3 = new THREE.Mesh(
       new THREE.TorusGeometry(2.75, 0.008, 8, compact ? 80 : 132),
-      new THREE.MeshBasicMaterial({
-        color: colors.pink,
-        transparent: true,
-        opacity: 0.42,
-      }),
+      new THREE.MeshBasicMaterial({ color: colors.pink, transparent: true, opacity: 0.42 }),
     );
     halo3.rotation.y = Math.PI / 2.4;
     halo3.rotation.z = -0.45;
@@ -325,31 +246,13 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     group.add(haloGroup);
 
     // Tiny satellites make the hero feel alive without competing with the copy.
-    const satelliteGeometry = new THREE.SphereGeometry(
-      compact ? 0.032 : 0.04,
-      8,
-      8,
-    );
+    const satelliteGeometry = new THREE.SphereGeometry(compact ? 0.032 : 0.04, 8, 8);
     const satelliteMaterials = [
-      new THREE.MeshBasicMaterial({
-        color: colors.cyan,
-        transparent: true,
-        opacity: 0.95,
-      }),
-      new THREE.MeshBasicMaterial({
-        color: colors.pink,
-        transparent: true,
-        opacity: 0.9,
-      }),
-      new THREE.MeshBasicMaterial({
-        color: colors.violet,
-        transparent: true,
-        opacity: 0.9,
-      }),
+      new THREE.MeshBasicMaterial({ color: colors.cyan, transparent: true, opacity: 0.95 }),
+      new THREE.MeshBasicMaterial({ color: colors.pink, transparent: true, opacity: 0.9 }),
+      new THREE.MeshBasicMaterial({ color: colors.violet, transparent: true, opacity: 0.9 }),
     ];
-    const satellites = satelliteMaterials.map(
-      (material: any) => new THREE.Mesh(satelliteGeometry, material),
-    );
+    const satellites = satelliteMaterials.map((material: any) => new THREE.Mesh(satelliteGeometry, material));
     satellites.forEach((satellite: any) => group.add(satellite));
 
     scene.add(new THREE.AmbientLight(0x6655ff, 0.55));
@@ -377,14 +280,8 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
       particleColors[i * 3 + 2] = c.b;
     }
     const particleGeometry = new THREE.BufferGeometry();
-    particleGeometry.setAttribute(
-      "position",
-      new THREE.BufferAttribute(positions, 3),
-    );
-    particleGeometry.setAttribute(
-      "color",
-      new THREE.BufferAttribute(particleColors, 3),
-    );
+    particleGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    particleGeometry.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
     const particles = new THREE.Points(
       particleGeometry,
       new THREE.PointsMaterial({
@@ -400,11 +297,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
     const fadeMaterials: Array<{ material: any; base: number }> = [];
     group.traverse((object: any) => {
-      if (object.material)
-        fadeMaterials.push({
-          material: object.material,
-          base: object.material.opacity ?? 1,
-        });
+      if (object.material) fadeMaterials.push({ material: object.material, base: object.material.opacity ?? 1 });
     });
 
     let vw = 1;
@@ -425,21 +318,15 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
     const targetFor = (id: string) => {
       if (mobile) {
-        if (id === "home")
-          return { x: 0, y: vh * 0.31, scale: 0.53, opacity: 0.78 };
+        if (id === "home") return { x: 0, y: vh * 0.31, scale: 0.53, opacity: 0.78 };
         return { x: 0, y: 0, scale: 0.42, opacity: 0.08 };
       }
       switch (id) {
-        case "home":
-          return { x: vw * 0.245, y: 0, scale: 1, opacity: 1 };
-        case "stack":
-          return { x: vw * 0.3, y: 0, scale: 0.72, opacity: 0.18 };
-        case "projects":
-          return { x: 0, y: 0, scale: 0.95, opacity: 0.1 };
-        case "about":
-          return { x: -vw * 0.28, y: 0, scale: 0.8, opacity: 0.22 };
-        default:
-          return { x: 0, y: 0, scale: 1.3, opacity: 0.15 };
+        case "home": return { x: vw * 0.245, y: 0, scale: 1, opacity: 1 };
+        case "stack": return { x: vw * 0.3, y: 0, scale: 0.72, opacity: 0.18 };
+        case "projects": return { x: 0, y: 0, scale: 0.95, opacity: 0.1 };
+        case "about": return { x: -vw * 0.28, y: 0, scale: 0.8, opacity: 0.22 };
+        default: return { x: 0, y: 0, scale: 1.3, opacity: 0.15 };
       }
     };
 
@@ -471,8 +358,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
       const t = ease(Math.min(1, Math.max(0, (local - 0.58) / 0.34)));
       const a = morphTargets[currentIndex];
       const b = morphTargets[nextIndex];
-      for (let i = 0; i < morphPositions.length; i += 1)
-        morphPositions[i] = a[i] + (b[i] - a[i]) * t;
+      for (let i = 0; i < morphPositions.length; i += 1) morphPositions[i] = a[i] + (b[i] - a[i]) * t;
       morphPositionAttribute.needsUpdate = true;
     };
 
@@ -487,14 +373,8 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
       updateMorph(time);
 
-      group.position.set(
-        current.x,
-        current.y + Math.sin(time * 0.75) * 0.12,
-        0,
-      );
-      group.scale.setScalar(
-        current.scale * (1 + Math.sin(time * 1.15) * 0.018),
-      );
+      group.position.set(current.x, current.y + Math.sin(time * 0.75) * 0.12, 0);
+      group.scale.setScalar(current.scale * (1 + Math.sin(time * 1.15) * 0.018));
       const drift = reduce ? 0 : Math.sin(time * 0.22) * 0.08;
       group.rotation.y += (mouse.nx * 0.36 + drift - group.rotation.y) * 0.045;
       group.rotation.x += (mouse.ny * 0.18 - group.rotation.x) * 0.045;
@@ -507,9 +387,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
       const satRadius = compact ? 2.15 : 2.6;
       satellites.forEach((satellite: any, index: number) => {
-        const angle =
-          time * (0.48 + index * 0.09) +
-          index * ((Math.PI * 2) / satellites.length);
+        const angle = time * (0.48 + index * 0.09) + index * ((Math.PI * 2) / satellites.length);
         satellite.position.set(
           Math.cos(angle) * satRadius,
           Math.sin(angle * 1.18) * (1.25 + index * 0.13),
@@ -521,9 +399,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
       particles.rotation.x = mouse.ny * 0.025;
       particles.position.y = -window.scrollY * 0.0014;
 
-      fadeMaterials.forEach(({ material, base }) => {
-        material.opacity = base * current.opacity;
-      });
+      fadeMaterials.forEach(({ material, base }) => { material.opacity = base * current.opacity; });
       renderer.render(scene, camera);
       animationFrame = requestAnimationFrame(frame);
     };
@@ -555,8 +431,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
       window.removeEventListener("mousemove", onMouseMove);
       scene.traverse((object: any) => {
         object.geometry?.dispose?.();
-        if (Array.isArray(object.material))
-          object.material.forEach((material: any) => material.dispose?.());
+        if (Array.isArray(object.material)) object.material.forEach((material: any) => material.dispose?.());
         else object.material?.dispose?.();
       });
       renderer.dispose();

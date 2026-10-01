@@ -12,6 +12,7 @@ test("Portfolio Configuration & Identity", async (t) => {
     assert.match(site.email, /@/);
     assert.match(site.linkedin, /^https:\/\//);
     assert.match(site.whatsapp, /^https:\/\//);
+    assert.equal(site.resume, "/Eduardo_De_La_Cruz_Resume.pdf");
   });
 });
 
@@ -24,6 +25,7 @@ test("Internationalization (EN / ES Parity)", async (t) => {
     for (const locale of [en, es]) {
       assert.ok(locale.nav.stack);
       assert.ok(locale.hero.lead);
+      assert.ok(locale.hero.resume);
       assert.ok(locale.projects.title);
       assert.ok(locale.projects.explore);
       assert.ok(locale.about.title);
