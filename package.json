@@ -1,17 +1,16 @@
 {
-  "name": "eduardo-portfolio",
+  "name": "eduardo-de-la-cruz-portfolio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "test": "node --experimental-strip-types --test tests/portfolio.test.mjs"
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@vitejs/plugin-react": "^6.1.1",
-    "lucide-react": "^1.47.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "typescript": "~6.0.2",
@@ -23,7 +22,6 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.7",
     "eslint": "^10.11.0",
-    "sharp": "^0.35.5",
     "typescript-eslint": "^8.69.0"
   }
 }
