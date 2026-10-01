@@ -2166,3 +2166,26 @@ footer button {
   }
 }
 .project-modal-scroll { flex: 1 1 auto; }
+
+/* GIO cover — keep the full dashboard visible */
+.cover-gio .browser-main img {
+  object-fit: contain;
+  object-position: center;
+  background: #f7f7f3;
+}
+
+/* Make the dashboard the protagonist */
+.cover-gio .browser-main {
+  left: 5%;
+  top: 15%;
+  width: 76%;
+  height: 70%;
+}
+
+/* Keep the login as a smaller secondary preview */
+.cover-gio .phone-side {
+  right: 5%;
+  top: 19%;
+  width: 20%;
+  height: 64%;
+}
