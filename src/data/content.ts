@@ -112,7 +112,7 @@ export const content = {
             { src: "/images/projects/gio/patients-mobile.webp", alt: "GIO Workspace mobile patient view", label: "Patients", kind: "mobile" },
           ],
           stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Vite"],
-          caseStudy: "/GIO-Workspace.pdf",
+          caseStudy: "/gio-workspace.pdf",
           visual: "gio",
         },
         {
@@ -317,7 +317,7 @@ export const content = {
             { src: "/images/projects/gio/patients-mobile.webp", alt: "Pacientes de GIO Workspace en móvil", label: "Pacientes", kind: "mobile" },
           ],
           stack: ["React", "TypeScript", "Supabase", "PostgreSQL", "Vite"],
-          caseStudy: "/GIO-Workspace.pdf",
+          caseStudy: "/gio-workspace.pdf",
           visual: "gio",
         },
         {
