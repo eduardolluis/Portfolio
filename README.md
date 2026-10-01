@@ -1,31 +1,53 @@
 # Eduardo De La Cruz — Portfolio
 
-Vite + React + TypeScript portfolio with bilingual content, real project screenshots, responsive project galleries, accessible interactions, a lightweight Three.js background and a contact form with a safe email-draft fallback.
+Personal portfolio for Eduardo De La Cruz, Software Engineering student and full-stack/mobile developer based in Santo Domingo, Dominican Republic.
 
-## Run locally
+## Featured work
+
+- **GIO Workspace** — client management platform for scheduling, patients, staff, services, finances, reports, inventory and role-based access.
+- **Melodix** — Flutter music streaming app with a FastAPI/PostgreSQL backend.
+- **Whatzapp** — cross-platform real-time messaging app with calls, media sharing and live location.
+- **Multi Store** — Flutter multi-vendor commerce project with customer and supplier flows.
+
+Multi Store images in the portfolio are presentation previews reconstructed from the project's actual Flutter UI code and bundled assets because the repository does not include finished screenshots. The portfolio labels them accordingly.
+
+## Stack
+
+React, TypeScript, Vite, Three.js and CSS.
+
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Production check
+Quality checks:
 
 ```bash
-npm run check
+npm test
+npm run lint
+npm run build
 ```
-
-This runs the content tests, ESLint and the production Vite build.
-
-## Main projects
-
-- GIO Workspace — client business management platform
-- Melodix — Flutter + FastAPI music application
-- Whatzapp — real-time Flutter messaging project
-- Discord Clone — Next.js real-time community platform
 
 ## Contact form
 
-On Vercel, the form posts to `/api/contact` and sends through Resend when `RESEND_API_KEY` is configured. If the serverless endpoint is unavailable or email delivery is not configured, the UI falls back to a pre-filled email draft instead of claiming a message was sent.
+The portfolio works without a mail provider: if server-side sending is unavailable, the contact flow falls back to a prefilled email to `eduardodelacruzg5@gmail.com`.
 
-Copy `.env.example` into your deployment environment and set `RESEND_API_KEY`, `CONTACT_TO_EMAIL` and `CONTACT_FROM_EMAIL` for direct delivery.
+When a custom domain is available, server-side delivery can be enabled with a verified sender domain and these Vercel environment variables:
+
+```text
+RESEND_API_KEY=...
+CONTACT_TO_EMAIL=eduardodelacruzg5@gmail.com
+CONTACT_FROM_EMAIL=Portfolio <portfolio@your-verified-domain.com>
+```
+
+Do not commit API keys or secrets.
+
+## Deployment
+
+Current canonical URL:
+
+`https://eduardo-portfolio-neon-two.vercel.app/`
+
+When moving to a custom domain, update the canonical URL, Open Graph URL, sitemap and robots file together.
