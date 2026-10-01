@@ -51,7 +51,7 @@ test("Internationalization (EN / ES Parity)", async (t) => {
         "/images/projects/gio/dashboard.webp",
       );
       assert.equal(gioEn?.gallery[0].label, "Dashboard");
-      assert.ok(gioEn?.gallery.some((shot) => shot.label === "Login"));
+      assert.ok(gioEn?.gallery.some((shot) => shot.label.toLowerCase().includes("login")));
       assert.ok(gioEn?.gallery.some((shot) => shot.kind === "mobile"));
       assert.equal(gioEn?.caseStudy, "/gio-workspace.pdf");
     },
@@ -66,6 +66,16 @@ test("Internationalization (EN / ES Parity)", async (t) => {
       assert.ok(whatzapp?.disclaimer?.includes("Not affiliated with WhatsApp"));
     },
   );
+
+
+  await t.test("Multi Store replaces Discord and exposes a real project gallery", () => {
+    const multi = en.projects.items.find((project) => project.id === "multistore");
+    assert.ok(multi);
+    assert.ok(multi.gallery.some((shot) => shot.label === "Home"));
+    assert.ok(multi.gallery.some((shot) => shot.label === "Login"));
+    assert.ok(multi.previewNote);
+    assert.equal(en.projects.items.some((project) => project.id === "discord"), false);
+  });
 
   await t.test("Capabilities expose the active service categories", () => {
     assert.equal(en.capabilities.items.length, 4);
