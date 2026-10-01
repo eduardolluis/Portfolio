@@ -1213,6 +1213,19 @@ footer button {
   border: 3px solid rgba(255, 255, 255, 0.88);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
 }
+.modal-stage.stage-mobile {
+  width: min(360px, 100%);
+  min-height: 0;
+  height: auto;
+  margin-inline: auto;
+  padding: 0;
+}
+.modal-stage.stage-mobile img {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  display: block;
+}
 .gallery-arrow {
   position: absolute;
   top: 50%;
@@ -1861,11 +1874,20 @@ footer button {
   }
 
   .modal-stage.stage-mobile img {
-    width: auto;
-    max-width: 72%;
-    max-height: 100%;
+    width: 100%;
+    max-width: none;
+    max-height: none;
     border-width: 2px;
     border-radius: 18px;
+  }
+
+  .modal-stage.stage-mobile {
+    width: min(360px, 100%);
+    height: auto;
+    margin-inline: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
   }
 
   .gallery-arrow {
