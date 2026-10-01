@@ -1,5 +1,5 @@
 import React from "react";
-import { Check, Code2, Smartphone, Server, Database, MapPin } from "lucide-react";
+import { Check, Code2, Smartphone, Server, Database, MapPin, Wrench } from "lucide-react";
 import { LocaleContent } from "../types";
 
 interface AboutProps {
@@ -37,7 +37,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
 
           <div className="about-location-badge">
             <MapPin size={16} className="pin-icon" aria-hidden="true" />
-            <span>Santo Domingo, Dominican Republic · Available Globally</span>
+            <span>{content.locationText}</span>
           </div>
         </div>
 
@@ -45,15 +45,13 @@ export const About: React.FC<AboutProps> = ({ content }) => {
         <div className="about-stack-col">
           <div className="stack-container-card">
             <h3 className="stack-heading">{content.stackTitle}</h3>
-            <p className="stack-subtext">
-              Technologies and frameworks actively used across production client platforms and software engineering systems.
-            </p>
+            <p className="stack-subtext">{content.stackDescription}</p>
 
             {/* Frontend */}
             <div className="stack-category-block">
               <div className="stack-cat-header">
                 <Code2 size={16} className="cat-icon" aria-hidden="true" />
-                <span className="cat-title">Frontend Architecture</span>
+                <span className="cat-title">{content.stackLabels.frontend}</span>
               </div>
               <div className="stack-chips">
                 {content.frontend.map((item) => (
@@ -68,7 +66,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             <div className="stack-category-block">
               <div className="stack-cat-header">
                 <Smartphone size={16} className="cat-icon" aria-hidden="true" />
-                <span className="cat-title">Mobile Engineering</span>
+                <span className="cat-title">{content.stackLabels.mobile}</span>
               </div>
               <div className="stack-chips">
                 {content.mobile.map((item) => (
@@ -83,7 +81,7 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             <div className="stack-category-block">
               <div className="stack-cat-header">
                 <Server size={16} className="cat-icon" aria-hidden="true" />
-                <span className="cat-title">Backend & APIs</span>
+                <span className="cat-title">{content.stackLabels.backend}</span>
               </div>
               <div className="stack-chips">
                 {content.backend.map((item) => (
@@ -98,10 +96,24 @@ export const About: React.FC<AboutProps> = ({ content }) => {
             <div className="stack-category-block">
               <div className="stack-cat-header">
                 <Database size={16} className="cat-icon" aria-hidden="true" />
-                <span className="cat-title">Database & Cloud</span>
+                <span className="cat-title">{content.stackLabels.databaseCloud}</span>
               </div>
               <div className="stack-chips">
                 {content.databaseCloud.map((item) => (
+                  <span key={item} className="stack-chip">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="stack-category-block">
+              <div className="stack-cat-header">
+                <Wrench size={16} className="cat-icon" aria-hidden="true" />
+                <span className="cat-title">{content.stackLabels.tools}</span>
+              </div>
+              <div className="stack-chips">
+                {content.tools.map((item) => (
                   <span key={item} className="stack-chip">
                     {item}
                   </span>

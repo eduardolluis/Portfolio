@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ content, onOpenPrivacy }) => {
           </div>
 
           <div className="footer-nav-col">
-            <h4 className="footer-heading">Connect</h4>
+            <h4 className="footer-heading">{content.connectTitle}</h4>
             <div className="footer-social-links">
               {/* GitHub */}
               <a

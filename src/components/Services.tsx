@@ -31,7 +31,9 @@ export const Services: React.FC<ServicesProps> = ({ content, onNavigate }) => {
       <div className="section-container">
         {/* Section Header */}
         <div className="section-header section-header-dark">
-          <span className="section-eyebrow eyebrow-light">{content.eyebrow}</span>
+          <span className="section-eyebrow eyebrow-light">
+            {content.eyebrow}
+          </span>
           <h2 className="section-title title-light">{content.title}</h2>
           <p className="section-subtitle subtitle-light">{content.subtitle}</p>
         </div>
@@ -52,7 +54,7 @@ export const Services: React.FC<ServicesProps> = ({ content, onNavigate }) => {
                     onClick={() => onNavigate("contact")}
                     aria-label={`Inquire about ${service.title}`}
                   >
-                    <span>Inquire</span>
+                    <span>{content.inquireLabel}</span>
                     <ArrowUpRight size={14} />
                   </button>
                 </div>
@@ -62,24 +64,19 @@ export const Services: React.FC<ServicesProps> = ({ content, onNavigate }) => {
                 {/* Problem vs Deliverable Breakdown */}
                 <div className="service-breakdown">
                   <div className="service-sub-block">
-                    <span className="service-sub-label">{content.problemLabel}</span>
+                    <span className="service-sub-label">
+                      {content.problemLabel}
+                    </span>
                     <p className="service-sub-text">{service.problem}</p>
                   </div>
                   <div className="service-sub-block">
                     <span className="service-sub-label label-accent">
                       {content.deliverableLabel}
                     </span>
-                    <p className="service-sub-text text-strong">{service.deliverable}</p>
+                    <p className="service-sub-text text-strong">
+                      {service.deliverable}
+                    </p>
                   </div>
-                </div>
-
-                {/* Tags */}
-                <div className="service-tags" aria-label="Capabilities included">
-                  {service.tags.map((tag) => (
-                    <span key={tag} className="service-tag-pill">
-                      {tag}
-                    </span>
-                  ))}
                 </div>
               </article>
             );

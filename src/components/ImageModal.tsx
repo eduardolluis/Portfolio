@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { X, ZoomIn, ExternalLink } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { X, ZoomIn } from "lucide-react";
 
 interface ImageModalProps {
   isOpen: boolean;
@@ -18,6 +18,8 @@ export const ImageModal: React.FC<ImageModalProps> = ({
   title,
   onClose,
 }) => {
+  const [isPortrait, setIsPortrait] = useState(false);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -35,6 +37,10 @@ export const ImageModal: React.FC<ImageModalProps> = ({
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
+
+  useEffect(() => {
+    setIsPortrait(false);
+  }, [imageUrl]);
 
   if (!isOpen || !imageUrl) return null;
 
@@ -55,16 +61,6 @@ export const ImageModal: React.FC<ImageModalProps> = ({
           </div>
 
           <div className="lightbox-controls">
-            <a
-              href={imageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="lightbox-action-btn"
-              title="Open full image in new tab"
-            >
-              <ExternalLink size={16} />
-              <span>Original File</span>
-            </a>
             <button
               type="button"
               className="lightbox-close-btn"
@@ -81,7 +77,11 @@ export const ImageModal: React.FC<ImageModalProps> = ({
           <img
             src={imageUrl}
             alt={imageAlt}
-            className="lightbox-img"
+            className={`lightbox-img ${isPortrait ? "lightbox-img-portrait" : ""}`}
+            onLoad={(event) => {
+              const image = event.currentTarget;
+              setIsPortrait(image.naturalHeight > image.naturalWidth * 1.2);
+            }}
           />
         </div>
 

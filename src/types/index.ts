@@ -2,7 +2,9 @@ export type Locale = "en" | "es";
 
 export interface ProjectScreenshot {
   url: string;
+  fallbackUrl?: string;
   alt: string;
+  label?: string;
   caption?: string;
   type?: "desktop" | "mobile";
 }
@@ -53,6 +55,12 @@ export interface ContactFormField {
   required?: boolean;
 }
 
+export interface HeroShowcaseCopy {
+  category: string;
+  description: string;
+  status: string;
+}
+
 export interface LocaleContent {
   meta: {
     title: string;
@@ -77,6 +85,14 @@ export interface LocaleContent {
     ctaPrimary: string;
     ctaSecondary: string;
     ticker: string[];
+    selectedWork: string;
+    expandView: string;
+    viewCaseStudy: string;
+    showcase: {
+      gio: HeroShowcaseCopy;
+      melodix: HeroShowcaseCopy;
+      whatzapp: HeroShowcaseCopy;
+    };
   };
   capabilities: {
     eyebrow: string;
@@ -96,12 +112,19 @@ export interface LocaleContent {
     viewSource: string;
     liveDemo: string;
     viewGallery: string;
+    ctaLabel: string;
+    expandView: string;
+    screenshotView: string;
+    privateProject: string;
+    desktopView: string;
+    mobileView: string;
     projects: ProjectData[];
   };
   services: {
     eyebrow: string;
     title: string;
     subtitle: string;
+    inquireLabel: string;
     problemLabel: string;
     deliverableLabel: string;
     items: ServiceItem[];
@@ -113,11 +136,21 @@ export interface LocaleContent {
     body: string;
     focusTitle: string;
     focusItems: string[];
+    locationText: string;
     stackTitle: string;
+    stackDescription: string;
+    stackLabels: {
+      frontend: string;
+      mobile: string;
+      backend: string;
+      databaseCloud: string;
+      tools: string;
+    };
     frontend: string[];
     mobile: string[];
     backend: string[];
     databaseCloud: string[];
+    tools: string[];
   };
   process: {
     eyebrow: string;
@@ -132,6 +165,10 @@ export interface LocaleContent {
     emailLabel: string;
     whatsappLabel: string;
     directTalk: string;
+    directDescription: string;
+    responseTime: string;
+    whatsappMessage: string;
+    emailFallback: string;
     form: {
       name: string;
       namePlaceholder: string;
@@ -178,5 +215,6 @@ export interface LocaleContent {
     backToTop: string;
     privacyPolicy: string;
     location: string;
+    connectTitle: string;
   };
 }

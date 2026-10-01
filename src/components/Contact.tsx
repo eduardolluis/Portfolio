@@ -130,9 +130,7 @@ export const Contact: React.FC<ContactProps> = ({ content }) => {
         <div className="contact-direct-col">
           <div className="contact-direct-card">
             <h3 className="direct-heading">{content.directTalk}</h3>
-            <p className="direct-desc">
-              For immediate inquiries, quick consultations, or scheduling a video discovery call:
-            </p>
+            <p className="direct-desc">{content.directDescription}</p>
 
             {/* Email Channel */}
             <a
@@ -152,7 +150,7 @@ export const Contact: React.FC<ContactProps> = ({ content }) => {
 
             {/* WhatsApp Channel */}
             <a
-              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Hello Eduardo, I saw your portfolio and would like to discuss a custom software project.")}`}
+              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(content.whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="direct-channel-item"
@@ -171,7 +169,7 @@ export const Contact: React.FC<ContactProps> = ({ content }) => {
             {/* Availability Note */}
             <div className="response-time-banner">
               <Clock size={16} className="clock-icon" aria-hidden="true" />
-              <span>Fast response time · Typically replies within 24 business hours</span>
+              <span>{content.responseTime}</span>
             </div>
           </div>
         </div>
@@ -335,7 +333,7 @@ export const Contact: React.FC<ContactProps> = ({ content }) => {
                         href={`mailto:${siteConfig.email}?subject=${encodeURIComponent("Project Inquiry: " + formData.name)}&body=${encodeURIComponent(formData.message)}`}
                         className="alert-fallback-link"
                       >
-                        Click here to email me directly →
+                        {content.emailFallback}
                       </a>
                     )}
                   </div>

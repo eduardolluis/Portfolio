@@ -1,5 +1,13 @@
-import { useState } from "react";
-import { ArrowUpRight, ExternalLink, ShieldCheck, CheckCircle2, Smartphone, Monitor, Maximize2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import {
+  ArrowUpRight,
+  ExternalLink,
+  ShieldCheck,
+  CheckCircle2,
+  Smartphone,
+  Monitor,
+  Maximize2,
+} from "lucide-react";
 import { GithubIcon } from "./Icons";
 import { LocaleContent, ProjectData } from "../types";
 import { ImageModal } from "./ImageModal";
@@ -7,63 +15,90 @@ import { ImageModal } from "./ImageModal";
 interface FeaturedWorkProps {
   content: LocaleContent["work"];
 }
+type WorkLabels = Omit<
+  LocaleContent["work"],
+  "projects" | "eyebrow" | "title" | "subtitle"
+>;
 
-export const FeaturedWork: React.FC<FeaturedWorkProps> = ({ content }) => {
-  return (
-    <section className="section-container work-section" id="work">
-      {/* Section Header */}
-      <div className="section-header">
-        <span className="section-eyebrow">{content.eyebrow}</span>
-        <h2 className="section-title">{content.title}</h2>
-        <p className="section-subtitle">{content.subtitle}</p>
-      </div>
-
-      {/* Projects List */}
-      <div className="projects-container">
-        {content.projects.map((project, index) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            index={index}
-            total={content.projects.length}
-            labels={{
-              featuredBadge: content.featuredBadge,
-              caseStudyLabel: content.caseStudyLabel,
-              challengeLabel: content.challengeLabel,
-              solutionLabel: content.solutionLabel,
-              builtLabel: content.builtLabel,
-              techLabel: content.techLabel,
-              viewSource: content.viewSource,
-              liveDemo: content.liveDemo,
-            }}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
+export const FeaturedWork: React.FC<FeaturedWorkProps> = ({ content }) => (
+  <section className="section-container work-section" id="work">
+    <div className="section-header">
+      <span className="section-eyebrow">{content.eyebrow}</span>
+      <h2 className="section-title">{content.title}</h2>
+      <p className="section-subtitle">{content.subtitle}</p>
+    </div>
+    <div className="projects-container">
+      {content.projects.map((project, index) => (
+        <ProjectCard
+          key={project.id}
+          project={project}
+          index={index}
+          total={content.projects.length}
+          labels={content}
+        />
+      ))}
+    </div>
+    <div className="work-cta-row">
+      <a className="btn btn-primary" href="#contact">
+        {content.ctaLabel}
+        <ArrowUpRight size={16} aria-hidden="true" />
+      </a>
+    </div>
+  </section>
+);
 
 interface ProjectCardProps {
   project: ProjectData;
   index: number;
   total: number;
-  labels: {
-    featuredBadge: string;
-    caseStudyLabel: string;
-    challengeLabel: string;
-    solutionLabel: string;
-    builtLabel: string;
-    techLabel: string;
-    viewSource: string;
-    liveDemo: string;
-  };
+  labels: WorkLabels;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  index,
+  total,
+  labels,
+}) => {
+  const availableDeviceTypes = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          project.screenshots.map((screenshot) => screenshot.type || "desktop"),
+        ),
+      ) as ("desktop" | "mobile")[],
+    [project.screenshots],
+  );
+  const [activeDevice, setActiveDevice] = useState<"desktop" | "mobile">(
+    availableDeviceTypes[0] || "desktop",
+  );
   const [activeScreenshotIdx, setActiveScreenshotIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const activeScreenshot = project.screenshots[activeScreenshotIdx] || project.screenshots[0];
+
+  useEffect(() => {
+    setActiveDevice(availableDeviceTypes[0] || "desktop");
+  }, [availableDeviceTypes, project.id]);
+
+  useEffect(() => {
+    setActiveScreenshotIdx(0);
+  }, [activeDevice, project.id]);
+
+  const filteredScreenshots = useMemo(() => {
+    if (availableDeviceTypes.length <= 1) return project.screenshots;
+    return project.screenshots.filter(
+      (screenshot) => (screenshot.type || "desktop") === activeDevice,
+    );
+  }, [activeDevice, availableDeviceTypes.length, project.screenshots]);
+
+  const activeScreenshot =
+    filteredScreenshots[activeScreenshotIdx] ||
+    filteredScreenshots[0] ||
+    project.screenshots[0];
   const isPrimary = index === 0;
+  const viewLabel =
+    activeScreenshot?.type === "mobile"
+      ? labels.mobileView
+      : labels.desktopView;
 
   return (
     <article
@@ -71,53 +106,73 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
       id={`project-${project.id}`}
       aria-labelledby={`heading-${project.id}`}
     >
-      {/* Top Meta Bar */}
       <div className="project-top-meta">
         <div className="project-meta-left">
           <span className="project-counter">
-            0{index + 1} <span className="counter-sep">/</span> 0{total}
+            {index + 1} <span className="counter-sep">/</span> {total}
           </span>
           <span className="project-category-tag">{project.category}</span>
         </div>
-
         {project.badge && (
-          <span className={`project-status-badge ${isPrimary ? "badge-primary" : ""}`}>
+          <span
+            className={`project-status-badge ${isPrimary ? "badge-primary" : ""}`}
+          >
             {isPrimary && <ShieldCheck size={13} aria-hidden="true" />}
             {project.badge}
           </span>
         )}
       </div>
 
-      {/* Main Grid: Visual Media + Case Study Breakdown */}
       <div className="project-content-grid">
-        {/* Left/Top: Visual Showcase Frame */}
         <div className="project-visual-column">
           <div className="showcase-frame">
-            {/* Window / Frame Header */}
-            <div className="mockup-chrome">
-              <div className="chrome-controls" aria-hidden="true">
-                <span className="control-dot dot-red"></span>
-                <span className="control-dot dot-yellow"></span>
-                <span className="control-dot dot-green"></span>
-              </div>
-              <div className="chrome-address-bar">
-                <span className="address-lock">🔒</span>
-                <span className="address-text">
-                  {project.id === "gio-workspace"
-                    ? "gioworkspace.internal"
-                    : `${project.id}.app`}
+            <div className="project-media-header">
+              <div className="project-media-info">
+                <span className="project-media-name">{project.name}</span>
+                <span className="project-media-active-view">
+                  {activeScreenshot?.type === "mobile" ? (
+                    <Smartphone size={14} aria-hidden="true" />
+                  ) : (
+                    <Monitor size={14} aria-hidden="true" />
+                  )}
+                  {viewLabel}
                 </span>
               </div>
-              <div className="chrome-device-indicator" aria-label={activeScreenshot?.type === "mobile" ? "Mobile View" : "Desktop View"}>
-                {activeScreenshot?.type === "mobile" ? (
-                  <Smartphone size={14} aria-hidden="true" />
-                ) : (
-                  <Monitor size={14} aria-hidden="true" />
-                )}
-              </div>
-            </div>
 
-            {/* Media Canvas with Click to Expand */}
+              {availableDeviceTypes.length > 1 && (
+                <div
+                  className="project-media-device-switch"
+                  role="tablist"
+                  aria-label={`${project.name} device view`}
+                >
+                  {availableDeviceTypes.map((deviceType) => {
+                    const isSelected = activeDevice === deviceType;
+                    const deviceLabel =
+                      deviceType === "mobile"
+                        ? labels.mobileView
+                        : labels.desktopView;
+
+                    return (
+                      <button
+                        key={deviceType}
+                        type="button"
+                        role="tab"
+                        aria-selected={isSelected}
+                        className={`device-toggle-btn ${isSelected ? "device-toggle-active" : ""}`}
+                        onClick={() => setActiveDevice(deviceType)}
+                      >
+                        {deviceType === "mobile" ? (
+                          <Smartphone size={13} aria-hidden="true" />
+                        ) : (
+                          <Monitor size={13} aria-hidden="true" />
+                        )}
+                        <span>{deviceLabel}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
             <div
               className={`mockup-viewport ${activeScreenshot?.type === "mobile" ? "viewport-mobile" : "viewport-desktop"} clickable-mockup`}
               onClick={() => activeScreenshot && setLightboxOpen(true)}
@@ -129,7 +184,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
                   setLightboxOpen(true);
                 }
               }}
-              title="Click to view full screenshot in high resolution"
+              title={labels.expandView}
             >
               {activeScreenshot ? (
                 <>
@@ -138,10 +193,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
                     alt={activeScreenshot.alt}
                     className="mockup-image"
                     loading="lazy"
+                    onError={(event) => {
+                      if (
+                        activeScreenshot.fallbackUrl &&
+                        event.currentTarget.src !== activeScreenshot.fallbackUrl
+                      ) {
+                        event.currentTarget.src = activeScreenshot.fallbackUrl;
+                      }
+                    }}
                   />
                   <div className="mockup-expand-hint">
                     <Maximize2 size={16} aria-hidden="true" />
-                    <span>Expand Full View</span>
+                    <span>{labels.expandView}</span>
                   </div>
                 </>
               ) : (
@@ -150,8 +213,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
                 </div>
               )}
             </div>
-
-            {/* Screenshot Caption */}
             {activeScreenshot?.caption && (
               <div className="mockup-caption">
                 <span className="caption-text">{activeScreenshot.caption}</span>
@@ -159,31 +220,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
             )}
           </div>
 
-          {/* Screenshot Selector Tabs if multiple images exist */}
-          {project.screenshots.length > 1 && (
+          {filteredScreenshots.length > 1 && (
             <div
               className="screenshot-tabs"
               role="tablist"
-              aria-label={`${project.name} screenshot views`}
+              aria-label={`${project.name} screenshots`}
             >
-              {project.screenshots.map((s, idx) => (
+              {filteredScreenshots.map((screenshot, idx) => (
                 <button
-                  key={s.url}
+                  key={screenshot.url}
                   type="button"
                   role="tab"
                   aria-selected={activeScreenshotIdx === idx}
                   className={`screenshot-tab-btn ${activeScreenshotIdx === idx ? "tab-active" : ""}`}
                   onClick={() => setActiveScreenshotIdx(idx)}
                 >
-                  <span className="tab-dot" aria-hidden="true"></span>
-                  <span>View 0{idx + 1}</span>
+                  <span>
+                    {screenshot.label || `${labels.screenshotView} ${idx + 1}`}
+                  </span>
                 </button>
               ))}
             </div>
           )}
         </div>
 
-        {/* Right/Bottom: Case Study Specification */}
         <div className="project-details-column">
           <div className="project-title-area">
             <h3 id={`heading-${project.id}`} className="project-title">
@@ -191,53 +251,45 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
             </h3>
             <p className="project-summary">{project.summary}</p>
           </div>
-
-          {/* Context & Challenge */}
           <div className="case-block">
             <h4 className="case-block-label">{labels.challengeLabel}</h4>
             <p className="case-block-text">{project.challenge}</p>
           </div>
-
-          {/* Engineered Solution */}
           <div className="case-block">
             <h4 className="case-block-label">{labels.solutionLabel}</h4>
             <p className="case-block-text">{project.solution}</p>
           </div>
-
-          {/* What I Built / Key Capabilities Delivered */}
           <div className="case-block">
             <h4 className="case-block-label">{labels.builtLabel}</h4>
             <ul className="capabilities-checklist">
-              {project.built.map((item, idx) => (
-                <li key={idx} className="checklist-item">
-                  <CheckCircle2 size={16} className="check-icon" aria-hidden="true" />
+              {project.built.map((item) => (
+                <li key={item} className="checklist-item">
+                  <CheckCircle2
+                    size={16}
+                    className="check-icon"
+                    aria-hidden="true"
+                  />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Technologies Used */}
           <div className="case-block">
             <h4 className="case-block-label">{labels.techLabel}</h4>
-            <div className="tech-badge-cloud" aria-label="Technologies used">
-              {project.tech.map((techItem) => (
-                <span key={techItem} className="tech-pill">
-                  {techItem}
+            <div className="tech-badge-cloud" aria-label={labels.techLabel}>
+              {project.tech.map((technology) => (
+                <span key={technology} className="tech-pill">
+                  {technology}
                 </span>
               ))}
             </div>
           </div>
-
-          {/* Independent disclaimer note if applicable */}
           {project.independentNote && (
             <div className="project-note-banner">
               <span className="note-icon">ℹ</span>
               <span className="note-text">{project.independentNote}</span>
             </div>
           )}
-
-          {/* Links / Actions */}
           <div className="project-actions-row">
             {project.github && (
               <a
@@ -251,7 +303,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
                 <ArrowUpRight size={14} aria-hidden="true" />
               </a>
             )}
-
             {project.live && (
               <a
                 href={project.live}
@@ -263,25 +314,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total, labels
                 <span>{labels.liveDemo}</span>
               </a>
             )}
-
-            {/* Client confidentiality indicator for GIO Workspace */}
             {!project.github && !project.live && (
               <span className="confidential-tag">
                 <ShieldCheck size={14} aria-hidden="true" />
-                <span>Client Proprietary Production Software</span>
+                <span>{labels.privateProject}</span>
               </span>
             )}
           </div>
         </div>
       </div>
 
-      {/* Lightbox Modal */}
       <ImageModal
         isOpen={lightboxOpen}
         imageUrl={activeScreenshot?.url || null}
         imageAlt={activeScreenshot?.alt || project.name}
         caption={activeScreenshot?.caption}
-        title={`${project.name} — Screenshot 0${activeScreenshotIdx + 1}`}
+        title={`${project.name} — ${activeScreenshot?.label || `${labels.screenshotView} ${activeScreenshotIdx + 1}`}`}
         onClose={() => setLightboxOpen(false)}
       />
     </article>

@@ -66,12 +66,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             e.preventDefault();
             handleNavClick("top");
           }}
-          aria-label="Eduardo de la Cruz - Home"
+          aria-label="Eduardo De La Cruz - Home"
         >
           <span className="brand-monogram">{siteConfig.monogram}</span>
-          <span className="brand-fullname">
-            Eduardo <span className="brand-accent">de la Cruz</span>
-          </span>
+          <span className="brand-fullname">Eduardo De La Cruz</span>
         </a>
 
         {/* Desktop Navigation Links */}
@@ -178,7 +176,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mobile-drawer-header">
-              <span className="mobile-brand-title">Eduardo de la Cruz</span>
+              <span className="mobile-brand-title">Eduardo De La Cruz</span>
               <button
                 type="button"
                 className="mobile-close-btn"
@@ -241,9 +239,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
               >
                 <Globe size={16} />
-                <span>
-                  Language: <strong>{locale === "en" ? "English (Switch to ES)" : "Español (Cambiar a EN)"}</strong>
-                </span>
+                <span>{locale === "en" ? "ES" : "EN"}</span>
               </button>
 
               <button

@@ -23,9 +23,9 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Eduardo de la Cruz",
+  name: "Eduardo De La Cruz",
   shortName: "Eduardo",
-  monogram: "EDC",
+  monogram: "E",
   role: {
     en: "Full-Stack Software Developer",
     es: "Desarrollador de Software Full-Stack",
@@ -44,5 +44,5 @@ export const siteConfig: SiteConfig = {
   whatsappFormatted: "+1 (849) 519-1571",
   // If user provides a LinkedIn profile URL, keep it here; otherwise null to hide it
   linkedin: "https://www.linkedin.com/in/eduardo-de-la-cruz-b6171837a/",
-  domain: "https://eduardodelacruz.dev",
+  domain: "https://eduardo-portfolio-neon-two.vercel.app",
 };
