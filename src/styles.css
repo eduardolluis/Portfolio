@@ -1126,6 +1126,7 @@ footer button {
 .project-modal {
   width: min(1180px, 100%);
   max-height: min(90vh, 900px);
+  padding: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   border-radius: 28px;
