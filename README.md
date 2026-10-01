@@ -108,7 +108,7 @@ npm run check     # Tests + lint + production build
 
 The portfolio is deployed on Vercel:
 
-**[https://eduardo-portfolio-neon-two.vercel.app/](https://portfolio-one-blue-anckqnppbh.vercel.app/)**
+**https://portfolio-one-blue-anckqnppbh.vercel.app/**
 
 ## Resume
 
