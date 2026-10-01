@@ -108,7 +108,7 @@ npm run check     # Tests + lint + production build
 
 The portfolio is deployed on Vercel:
 
-**https://eduardo-portfolio-neon-two.vercel.app/**
+**[https://eduardo-portfolio-neon-two.vercel.app/](https://portfolio-one-blue-anckqnppbh.vercel.app/)**
 
 ## Resume
 
@@ -125,7 +125,7 @@ Santo Domingo, Dominican Republic
 - Email: [eduardodelacruzg5@gmail.com](mailto:eduardodelacruzg5@gmail.com)
 - GitHub: [@eduardolluis](https://github.com/eduardolluis)
 - LinkedIn: [Eduardo De La Cruz](https://www.linkedin.com/in/eduardo-de-la-cruz-b6171837a/)
-- Portfolio: [eduardo-portfolio-neon-two.vercel.app](https://eduardo-portfolio-neon-two.vercel.app/)
+- Portfolio: [portfolio-one-blue-anckqnppbh.vercel.app](https://portfolio-one-blue-anckqnppbh.vercel.app/)
 
 ---
 
