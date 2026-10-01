@@ -39,7 +39,7 @@ function App() {
   const [copied, setCopied] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [contactForm, setContactForm] = useState({ name: "", email: "", type: "", message: "" });
-  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "sent" | "fallback">("idle");
+  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "sent" | "fallback" | "error">("idle");
   const t = content[lang];
 
   const marqueeItems = useMemo(
@@ -63,9 +63,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("portfolio-language", lang);
     document.documentElement.lang = lang;
-    document.title = lang === "en"
-      ? "Eduardo De La Cruz | Full-Stack & Flutter Developer"
-      : "Eduardo De La Cruz | Desarrollador Full-Stack & Flutter";
+    const title = lang === "en"
+      ? "Eduardo De La Cruz | Full-Stack Software Developer"
+      : "Eduardo De La Cruz | Desarrollador de Software Full-Stack";
+    const description = lang === "en"
+      ? "Portfolio of Eduardo De La Cruz, a full-stack software developer building web apps, mobile apps and business systems."
+      : "Portfolio de Eduardo De La Cruz, desarrollador full-stack de aplicaciones web, apps móviles y sistemas para negocios.";
+    document.title = title;
+    document.querySelector<HTMLMetaElement>('meta[name="description"]')?.setAttribute("content", description);
+    document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.setAttribute("content", title);
+    document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.setAttribute("content", description);
   }, [lang]);
 
   useEffect(() => {
@@ -259,7 +266,7 @@ function App() {
       }
 
       if (response.status === 400 || response.status === 429) {
-        setContactStatus("idle");
+        setContactStatus("error");
         return;
       }
 
@@ -268,6 +275,24 @@ function App() {
       openEmailDraft();
     }
   };
+
+
+  const isHomePath = window.location.pathname === "/" || window.location.pathname === "/index.html";
+  if (!isHomePath) {
+    return (
+      <>
+        <BackgroundScene activeId="home" />
+        <main className="not-found-page">
+          <div className="not-found-card">
+            <span className="section-kicker">404</span>
+            <h1>{t.notFound.title}</h1>
+            <p>{t.notFound.text}</p>
+            <a className="btn primary" href="/">{t.notFound.action}</a>
+          </div>
+        </main>
+      </>
+    );
+  }
 
   return (
     <>
@@ -454,7 +479,9 @@ function App() {
                     ? t.contact.form.sent
                     : contactStatus === "fallback"
                       ? t.contact.form.fallback
-                      : t.contact.form.note}
+                      : contactStatus === "error"
+                        ? t.contact.form.error
+                        : t.contact.form.note}
                 </small>
               </form>
             </div>
@@ -476,6 +503,9 @@ function App() {
           overview: t.projects.overview,
           gallery: t.projects.gallery,
           highlights: t.projects.highlights,
+          role: t.projects.role,
+          proof: t.projects.proof,
+          repository: t.projects.repository,
           viewCode: t.projects.viewCode,
           viewLive: t.projects.viewLive,
           caseStudy: t.projects.caseStudy,

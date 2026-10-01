@@ -12,6 +12,9 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const compact = window.innerWidth < 700;
+    const network = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+    if (network?.saveData || (compact && deviceMemory !== undefined && deviceMemory <= 2)) return;
     let renderer: any;
     try {
       renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
@@ -90,7 +93,7 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     light2.position.set(-5, -2, 5);
     scene.add(light2);
 
-    const count = compact ? 650 : 1400;
+    const count = compact ? 420 : 1200;
     const positions = new Float32Array(count * 3);
     const particleColors = new Float32Array(count * 3);
     const colorSet = [new THREE.Color(colors.violet), new THREE.Color(colors.cyan), new THREE.Color(colors.pink)];
