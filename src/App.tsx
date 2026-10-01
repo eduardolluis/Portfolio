@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react";
 import { BackgroundScene } from "./components/BackgroundScene";
 import { ProjectModal } from "./components/ProjectModal";
 import { ProjectVisual } from "./components/ProjectVisual";
@@ -39,6 +39,7 @@ function App() {
   const [copied, setCopied] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [contactForm, setContactForm] = useState({ name: "", email: "", type: "", message: "" });
+  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "sent" | "fallback">("idle");
   const t = content[lang];
 
   const marqueeItems = useMemo(
@@ -201,9 +202,13 @@ function App() {
     return () => window.removeEventListener("mousemove", move);
   }, []);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = useCallback((id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  }, []);
+
+  const closeProject = useCallback(() => {
+    setSelectedProject(null);
+  }, []);
 
   const copyEmail = async () => {
     try {
@@ -215,8 +220,10 @@ function App() {
     }
   };
 
-  const submitContact = (event: FormEvent<HTMLFormElement>) => {
+  const submitContact = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (contactStatus === "sending") return;
+
     const subject = `${contactForm.type || "Software project"} — ${contactForm.name || "Portfolio inquiry"}`;
     const body = [
       `${lang === "en" ? "Name" : "Nombre"}: ${contactForm.name}`,
@@ -225,7 +232,41 @@ function App() {
       "",
       contactForm.message,
     ].join("\n");
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    const openEmailDraft = () => {
+      setContactStatus("fallback");
+      window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+    setContactStatus("sending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: contactForm.name,
+          email: contactForm.email,
+          need: contactForm.type,
+          message: contactForm.message,
+          website: "",
+        }),
+      });
+
+      if (response.ok) {
+        setContactStatus("sent");
+        setContactForm({ name: "", email: "", type: "", message: "" });
+        return;
+      }
+
+      if (response.status === 400 || response.status === 429) {
+        setContactStatus("idle");
+        return;
+      }
+
+      openEmailDraft();
+    } catch {
+      openEmailDraft();
+    }
   };
 
   return (
@@ -388,11 +429,11 @@ function App() {
               <form className="contact-form reveal d1" onSubmit={submitContact}>
                 <label>
                   <span>{t.contact.form.name}</span>
-                  <input required value={contactForm.name} onChange={(event) => setContactForm((current) => ({ ...current, name: event.target.value }))} />
+                  <input required minLength={2} maxLength={100} autoComplete="name" value={contactForm.name} onChange={(event) => setContactForm((current) => ({ ...current, name: event.target.value }))} />
                 </label>
                 <label>
                   <span>{t.contact.form.email}</span>
-                  <input required type="email" value={contactForm.email} onChange={(event) => setContactForm((current) => ({ ...current, email: event.target.value }))} />
+                  <input required type="email" maxLength={120} autoComplete="email" value={contactForm.email} onChange={(event) => setContactForm((current) => ({ ...current, email: event.target.value }))} />
                 </label>
                 <label>
                   <span>{t.contact.form.type}</span>
@@ -403,10 +444,18 @@ function App() {
                 </label>
                 <label>
                   <span>{t.contact.form.message}</span>
-                  <textarea required rows={5} value={contactForm.message} onChange={(event) => setContactForm((current) => ({ ...current, message: event.target.value }))} />
+                  <textarea required minLength={5} maxLength={4000} rows={5} value={contactForm.message} onChange={(event) => setContactForm((current) => ({ ...current, message: event.target.value }))} />
                 </label>
-                <button className="btn primary" type="submit">{t.contact.form.submit}</button>
-                <small>{t.contact.form.note}</small>
+                <button className="btn primary" type="submit" disabled={contactStatus === "sending"}>
+                  {contactStatus === "sending" ? t.contact.form.sending : t.contact.form.submit}
+                </button>
+                <small aria-live="polite" className={`contact-status ${contactStatus}`}>
+                  {contactStatus === "sent"
+                    ? t.contact.form.sent
+                    : contactStatus === "fallback"
+                      ? t.contact.form.fallback
+                      : t.contact.form.note}
+                </small>
               </form>
             </div>
           </div>
@@ -431,7 +480,7 @@ function App() {
           viewLive: t.projects.viewLive,
           caseStudy: t.projects.caseStudy,
         }}
-        onClose={() => setSelectedProject(null)}
+        onClose={closeProject}
       />
     </>
   );

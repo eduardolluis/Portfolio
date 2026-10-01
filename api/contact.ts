@@ -96,24 +96,11 @@ export default async function handler(req: RequestLike, res: ResponseLike) {
   const toEmail = process.env.CONTACT_TO_EMAIL || "eduardodelacruzg5@gmail.com";
   const fromEmail = process.env.CONTACT_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>";
 
-  // If no Resend key is configured in dev or staging
+  // Never report a successful delivery when the provider is not configured.
+  // The client falls back to a pre-filled mail draft in this case.
   if (!resendApiKey) {
-    console.warn("[Contact API] RESEND_API_KEY not configured. Logging inquiry locally:");
-    console.log({
-      timestamp: new Date().toISOString(),
-      name,
-      email,
-      company: company || "(none)",
-      need: need || "(none)",
-      budget: budget || "(none)",
-      message,
-    });
-
-    // In local dev/staging without key, simulate successful delivery so UI works smoothly
-    return res.status(200).json({
-      ok: true,
-      notice: "Inquiry logged. Configure RESEND_API_KEY in production to send live emails.",
-    });
+    console.warn("[Contact API] RESEND_API_KEY is not configured.");
+    return res.status(503).json({ error: "Email delivery is not configured." });
   }
 
   try {
