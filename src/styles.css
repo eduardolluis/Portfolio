@@ -1126,7 +1126,9 @@ footer button {
 .project-modal {
   width: min(1180px, 100%);
   max-height: min(90vh, 900px);
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   border-radius: 28px;
   border: 1px solid rgba(160, 150, 255, 0.28);
   background: linear-gradient(
@@ -1139,9 +1141,9 @@ footer button {
     0 0 80px rgba(124, 92, 255, 0.12);
 }
 .project-modal-topbar {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 4;
+  flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1174,6 +1176,11 @@ footer button {
   grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
   gap: 1.6rem;
   padding: 1.4rem;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 .project-modal-visuals {
   min-width: 0;
@@ -1843,6 +1850,9 @@ footer button {
   .project-modal-layout {
     display: block;
     padding: 0.8rem 0.8rem calc(1.6rem + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
   }
 
   .modal-stage {
@@ -1950,5 +1960,36 @@ footer button {
 
   .stat span {
     margin-top: 0;
+  }
+}
+
+/* ---------- Debug / reliability polish ---------- */
+.contact-form .btn:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  transform: none !important;
+  box-shadow: none;
+}
+.contact-status {
+  min-height: 1.3em;
+}
+.contact-status.sent {
+  color: #76f2c1;
+}
+.contact-status.fallback {
+  color: #f6c87a;
+}
+.project-modal img,
+.project-cover img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+@media (max-width: 700px) {
+  .panel,
+  .capability-item,
+  .contact-form,
+  .nav {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 }
