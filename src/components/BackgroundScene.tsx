@@ -170,9 +170,10 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
     current.y = initial.y;
     const clock = new THREE.Clock();
     let animationFrame = 0;
+    let running = false;
 
     const frame = () => {
-      animationFrame = requestAnimationFrame(frame);
+      if (!running) return;
       const time = clock.getElapsedTime() * (reduce ? 0.15 : 1);
       const target = targetFor(activeRef.current);
       current.x += (target.x - current.x) * 0.05;
@@ -202,14 +203,39 @@ export function BackgroundScene({ activeId }: { activeId: string }) {
 
       fadeMaterials.forEach(({ material, base }) => { material.opacity = base * current.opacity; });
       renderer.render(scene, camera);
+      animationFrame = requestAnimationFrame(frame);
     };
-    frame();
+
+    const start = () => {
+      if (running || document.hidden) return;
+      running = true;
+      animationFrame = requestAnimationFrame(frame);
+    };
+
+    const stop = () => {
+      running = false;
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+    };
+
+    const onVisibilityChange = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    start();
 
     return () => {
-      cancelAnimationFrame(animationFrame);
+      stop();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMouseMove);
-      particleGeometry.dispose();
+      scene.traverse((object: any) => {
+        object.geometry?.dispose?.();
+        if (Array.isArray(object.material)) object.material.forEach((material: any) => material.dispose?.());
+        else object.material?.dispose?.();
+      });
       renderer.dispose();
     };
   }, []);
