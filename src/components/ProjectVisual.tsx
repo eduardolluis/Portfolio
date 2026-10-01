@@ -50,7 +50,7 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
         <img src="/images/projects/multistore/home.webp" alt="Multi Store customer home" loading="lazy" decoding="async" />
       </div>
       <div className="phone-shot phone-secondary">
-        <img src="/images/projects/multistore/dashboard.webp" alt="Multi Store supplier dashboard" loading="lazy" decoding="async" />
+        <img src="/images/projects/multistore/manage-products.webp" alt="Multi Store product management" loading="lazy" decoding="async" />
       </div>
     </div>
   );
