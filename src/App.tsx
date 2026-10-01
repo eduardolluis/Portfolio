@@ -238,10 +238,10 @@ function App() {
         <button className="logo" onClick={() => scrollTo("home")} type="button">
           eduardo<b>.</b>dev
         </button>
-        <button className={activeId === "stack" ? "active" : ""} onClick={() => scrollTo("stack")} type="button">{t.nav.stack}</button>
-        <button className={activeId === "projects" ? "active" : ""} onClick={() => scrollTo("projects")} type="button">{t.nav.projects}</button>
-        <button className={activeId === "about" ? "active" : ""} onClick={() => scrollTo("about")} type="button">{t.nav.about}</button>
-        <button className={activeId === "contact" ? "active" : ""} onClick={() => scrollTo("contact")} type="button">{t.nav.contact}</button>
+        <button className={`nav-stack ${activeId === "stack" ? "active" : ""}`} onClick={() => scrollTo("stack")} type="button">{t.nav.stack}</button>
+        <button className={`nav-projects ${activeId === "projects" ? "active" : ""}`} onClick={() => scrollTo("projects")} type="button">{t.nav.projects}</button>
+        <button className={`nav-about ${activeId === "about" ? "active" : ""}`} onClick={() => scrollTo("about")} type="button">{t.nav.about}</button>
+        <button className={`nav-contact ${activeId === "contact" ? "active" : ""}`} onClick={() => scrollTo("contact")} type="button">{t.nav.contact}</button>
         <button className="lang-switch" onClick={() => setLang((current) => current === "en" ? "es" : "en")} type="button" aria-label="Switch language">
           {lang === "en" ? "ES" : "EN"}
         </button>
