@@ -7,7 +7,7 @@
 
 A personal developer portfolio built with React, TypeScript, Vite and Three.js, focused on presenting my work, skills and experience through an interactive and responsive interface.
 
-[![Live Portfolio](https://img.shields.io/badge/Live_Portfolio-7C5CFF?style=for-the-badge&logo=vercel&logoColor=white)](https://eduardo-portfolio-neon-two.vercel.app/)
+[![Live Portfolio](https://img.shields.io/badge/Live_Portfolio-7C5CFF?style=for-the-badge&logo=vercel&logoColor=white)]([https://eduardo-portfolio-neon-two.vercel.app](https://portfolio-one-blue-anckqnppbh.vercel.app/)/)
 [![GitHub](https://img.shields.io/badge/GitHub-111827?style=for-the-badge&logo=github&logoColor=white)](https://github.com/eduardolluis)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/eduardo-de-la-cruz-b6171837a/)
 
