@@ -39,7 +39,13 @@ export function ProjectModal({
     if (!project) return;
 
     setActiveIndex(0);
-    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    requestAnimationFrame(() => {
+      if (dialogRef.current) dialogRef.current.scrollTop = 0;
+    });
+    previousFocusRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
 
     // Lock the document behind the dialog. Using a fixed body also prevents
     // touch/trackpad scroll from leaking to the portfolio underneath the modal.
@@ -55,7 +61,10 @@ export function ProjectModal({
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = "100%";
 
-    const focusTimer = window.setTimeout(() => closeButtonRef.current?.focus(), 0);
+    const focusTimer = window.setTimeout(
+      () => closeButtonRef.current?.focus(),
+      0,
+    );
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -70,12 +79,17 @@ export function ProjectModal({
       }
 
       if (event.key === "ArrowLeft") {
-        setActiveIndex((current) => (current - 1 + project.gallery.length) % project.gallery.length);
+        setActiveIndex(
+          (current) =>
+            (current - 1 + project.gallery.length) % project.gallery.length,
+        );
         return;
       }
 
       if (event.key !== "Tab" || !dialogRef.current) return;
-      const focusable = Array.from(dialogRef.current.querySelectorAll<HTMLElement>(focusableSelector));
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(focusableSelector),
+      );
       if (!focusable.length) return;
 
       const first = focusable[0];
@@ -119,7 +133,10 @@ export function ProjectModal({
   const active = project.gallery[activeIndex];
 
   const showPrevious = () => {
-    setActiveIndex((current) => (current - 1 + project.gallery.length) % project.gallery.length);
+    setActiveIndex(
+      (current) =>
+        (current - 1 + project.gallery.length) % project.gallery.length,
+    );
   };
 
   const showNext = () => {
@@ -146,7 +163,15 @@ export function ProjectModal({
             <span className="project-modal-category">{project.category}</span>
             <h2 id="project-modal-title">{project.title}</h2>
           </div>
-          <button ref={closeButtonRef} className="modal-close" type="button" onClick={onClose} aria-label={labels.close}>×</button>
+          <button
+            ref={closeButtonRef}
+            className="modal-close"
+            type="button"
+            onClick={onClose}
+            aria-label={labels.close}
+          >
+            ×
+          </button>
         </div>
 
         <div className="project-modal-layout">
@@ -159,8 +184,10 @@ export function ProjectModal({
                 touchStartX.current = event.touches[0]?.clientX ?? null;
               }}
               onTouchEnd={(event) => {
-                if (touchStartX.current == null || project.gallery.length < 2) return;
-                const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+                if (touchStartX.current == null || project.gallery.length < 2)
+                  return;
+                const endX =
+                  event.changedTouches[0]?.clientX ?? touchStartX.current;
                 const delta = endX - touchStartX.current;
                 touchStartX.current = null;
                 if (Math.abs(delta) < 48) return;
@@ -168,7 +195,12 @@ export function ProjectModal({
                 else showPrevious();
               }}
             >
-              <img src={active.src} alt={active.alt} decoding="async" draggable={false} />
+              <img
+                src={active.src}
+                alt={active.alt}
+                decoding="async"
+                draggable={false}
+              />
               {project.gallery.length > 1 ? (
                 <>
                   <button
@@ -190,7 +222,11 @@ export function ProjectModal({
                 </>
               ) : null}
             </div>
-            <div className="gallery-tabs" role="tablist" aria-label={labels.gallery}>
+            <div
+              className="gallery-tabs"
+              role="tablist"
+              aria-label={labels.gallery}
+            >
               {project.gallery.map((item, index) => (
                 <button
                   key={`${item.src}-${item.label}`}
@@ -214,23 +250,56 @@ export function ProjectModal({
             <div className="modal-detail-block">
               <span className="modal-section-label">{labels.highlights}</span>
               <ul className="modal-highlights">
-                {project.highlights.map((item) => <li key={item}>{item}</li>)}
+                {project.highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </div>
 
             <div className="modal-detail-block">
               <span className="modal-section-label">Stack</span>
               <div className="chips modal-chips">
-                {project.stack.map((item) => <span key={item}>{item}</span>)}
+                {project.stack.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
               </div>
             </div>
 
-            {project.disclaimer ? <p className="project-note modal-note">{project.disclaimer}</p> : null}
+            {project.disclaimer ? (
+              <p className="project-note modal-note">{project.disclaimer}</p>
+            ) : null}
 
             <div className="modal-links">
-              {project.caseStudy ? <a className="btn primary" href={project.caseStudy} target="_blank" rel="noopener noreferrer">{labels.caseStudy}</a> : null}
-              {project.live ? <a className="btn" href={project.live} target="_blank" rel="noopener noreferrer">{labels.viewLive}</a> : null}
-              {project.github ? <a className="btn" href={project.github} target="_blank" rel="noopener noreferrer">{labels.viewCode}</a> : null}
+              {project.caseStudy ? (
+                <a
+                  className="btn primary"
+                  href={project.caseStudy}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {labels.caseStudy}
+                </a>
+              ) : null}
+              {project.live ? (
+                <a
+                  className="btn"
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {labels.viewLive}
+                </a>
+              ) : null}
+              {project.github ? (
+                <a
+                  className="btn"
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {labels.viewCode}
+                </a>
+              ) : null}
             </div>
           </div>
         </div>

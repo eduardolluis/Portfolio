@@ -1126,9 +1126,8 @@ footer button {
 .project-modal {
   width: min(1180px, 100%);
   max-height: min(90vh, 900px);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   border-radius: 28px;
   border: 1px solid rgba(160, 150, 255, 0.28);
   background: linear-gradient(
@@ -1143,7 +1142,6 @@ footer button {
 .project-modal-topbar {
   position: relative;
   z-index: 4;
-  flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1176,11 +1174,6 @@ footer button {
   grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
   gap: 1.6rem;
   padding: 1.4rem;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-gutter: stable;
 }
 .project-modal-visuals {
   min-width: 0;
@@ -1850,9 +1843,6 @@ footer button {
   .project-modal-layout {
     display: block;
     padding: 0.8rem 0.8rem calc(1.6rem + env(safe-area-inset-bottom, 0px));
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
   }
 
   .modal-stage {
