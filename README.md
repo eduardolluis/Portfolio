@@ -1,6 +1,6 @@
 # Eduardo De La Cruz — Portfolio
 
-Vite + React + TypeScript portfolio adapted from the original visual concept, with bilingual content, real project screenshots, project galleries, responsive layouts, contact links and a mail-draft contact form.
+Vite + React + TypeScript portfolio with bilingual content, real project screenshots, responsive project galleries, accessible interactions, a lightweight Three.js background and a contact form with a safe email-draft fallback.
 
 ## Run locally
 
@@ -12,9 +12,10 @@ npm run dev
 ## Production check
 
 ```bash
-npm run lint
-npm run build
+npm run check
 ```
+
+This runs the content tests, ESLint and the production Vite build.
 
 ## Main projects
 
@@ -23,4 +24,8 @@ npm run build
 - Whatzapp — real-time Flutter messaging project
 - Discord Clone — Next.js real-time community platform
 
-The contact form intentionally opens the visitor's email client with the entered project details pre-filled; it does not pretend to submit to a backend service.
+## Contact form
+
+On Vercel, the form posts to `/api/contact` and sends through Resend when `RESEND_API_KEY` is configured. If the serverless endpoint is unavailable or email delivery is not configured, the UI falls back to a pre-filled email draft instead of claiming a message was sent.
+
+Copy `.env.example` into your deployment environment and set `RESEND_API_KEY`, `CONTACT_TO_EMAIL` and `CONTACT_FROM_EMAIL` for direct delivery.
