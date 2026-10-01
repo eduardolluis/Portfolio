@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Project } from "../data/content";
 
 type Labels = {
@@ -21,6 +21,7 @@ export function ProjectModal({
   onClose: () => void;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
     if (!project) return;
@@ -46,6 +47,14 @@ export function ProjectModal({
   if (!project) return null;
   const active = project.gallery[activeIndex];
 
+  const showPrevious = () => {
+    setActiveIndex((current) => (current - 1 + project.gallery.length) % project.gallery.length);
+  };
+
+  const showNext = () => {
+    setActiveIndex((current) => (current + 1) % project.gallery.length);
+  };
+
   return (
     <div className="project-modal-backdrop" role="presentation" onMouseDown={(event) => {
       if (event.currentTarget === event.target) onClose();
@@ -61,14 +70,28 @@ export function ProjectModal({
 
         <div className="project-modal-layout">
           <div className="project-modal-visuals">
-            <div className={`modal-stage ${active.kind === "mobile" ? "stage-mobile" : "stage-desktop"}`}>
+            <div
+              className={`modal-stage ${active.kind === "mobile" ? "stage-mobile" : "stage-desktop"}`}
+              onTouchStart={(event) => {
+                touchStartX.current = event.touches[0]?.clientX ?? null;
+              }}
+              onTouchEnd={(event) => {
+                if (touchStartX.current == null || project.gallery.length < 2) return;
+                const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+                const delta = endX - touchStartX.current;
+                touchStartX.current = null;
+                if (Math.abs(delta) < 48) return;
+                if (delta < 0) showNext();
+                else showPrevious();
+              }}
+            >
               <img src={active.src} alt={active.alt} />
               {project.gallery.length > 1 ? (
                 <>
                   <button
                     className="gallery-arrow gallery-prev"
                     type="button"
-                    onClick={() => setActiveIndex((current) => (current - 1 + project.gallery.length) % project.gallery.length)}
+                    onClick={showPrevious}
                     aria-label="Previous screen"
                   >
                     ←
@@ -76,7 +99,7 @@ export function ProjectModal({
                   <button
                     className="gallery-arrow gallery-next"
                     type="button"
-                    onClick={() => setActiveIndex((current) => (current + 1) % project.gallery.length)}
+                    onClick={showNext}
                     aria-label="Next screen"
                   >
                     →
