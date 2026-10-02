@@ -1,0 +1,31 @@
+@media (max-width: 390px) {
+  .nav button {
+    font-size: 0.7rem;
+    padding-inline: 0.48rem;
+  }
+
+  .hero .cta-row,
+  .contact .cta-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact .cta-row .btn:first-child {
+    grid-column: auto;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    display: grid;
+    grid-template-columns: minmax(90px, 0.7fr) 1fr;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .stat span {
+    margin-top: 0;
+  }
+}
+

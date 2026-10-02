@@ -1,0 +1,205 @@
+.project-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  background: rgba(5, 5, 18, 0.82);
+  backdrop-filter: blur(16px);
+  animation: modal-fade 0.2s ease both;
+}
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+.project-modal {
+  width: min(1180px, 100%);
+  max-height: min(90vh, 900px);
+  padding: 0;
+  border-radius: 28px;
+  border: 1px solid rgba(160, 150, 255, 0.28);
+  background: linear-gradient(
+    145deg,
+    rgba(16, 15, 48, 0.98),
+    rgba(8, 8, 26, 0.99)
+  );
+  box-shadow:
+    0 40px 120px rgba(0, 0, 0, 0.55),
+    0 0 80px rgba(124, 92, 255, 0.12);
+}
+.project-modal-topbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.4rem;
+  background: rgba(10, 9, 34, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+.project-modal-topbar h2 {
+  margin-top: 0.3rem;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+.modal-close {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+.modal-close:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.project-modal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  gap: 1.6rem;
+  padding: 1.4rem;
+}
+.project-modal-visuals {
+  min-width: 0;
+}
+.modal-stage {
+  position: relative;
+  min-height: 520px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(124, 92, 255, 0.16),
+      transparent 55%
+    ),
+    #090921;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-stage.stage-desktop img {
+  width: 100%;
+  max-height: 620px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+}
+.modal-stage.stage-mobile img {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  display: block;
+  border-radius: 22px;
+  border: 3px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+}
+.modal-stage.stage-mobile {
+  min-height: 0;
+  height: auto;
+  margin-inline: auto;
+  padding: 0;
+}
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(8, 8, 26, 0.74);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  backdrop-filter: blur(8px);
+}
+.gallery-prev {
+  left: 0.9rem;
+}
+.gallery-next {
+  right: 0.9rem;
+}
+.gallery-arrow:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.gallery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+.gallery-tabs button {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.035);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+.gallery-tabs button.active {
+  color: #fff;
+  border-color: rgba(34, 211, 238, 0.65);
+  background: rgba(34, 211, 238, 0.1);
+}
+.project-modal-copy {
+  padding: 0.2rem 0.4rem 0.5rem;
+  align-self: start;
+}
+.modal-description {
+  color: var(--muted);
+  font-size: 1.03rem;
+  margin-top: 0.65rem;
+}
+.modal-detail-block {
+  margin-top: 1.8rem;
+}
+.modal-highlights {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.modal-highlights li {
+  position: relative;
+  padding-left: 1.35rem;
+  color: var(--muted);
+}
+.modal-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--pink));
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+.modal-chips {
+  margin-top: 0.75rem;
+}
+.modal-note {
+  margin-top: 1.3rem !important;
+}
+.modal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+.modal-links .btn {
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+}
+

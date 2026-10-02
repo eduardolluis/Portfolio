@@ -1,0 +1,157 @@
+@media (max-width: 980px) {
+  .stack-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-copy {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .projects {
+    grid-template-columns: 1fr;
+  }
+  .browser-main {
+    width: 74%;
+  }
+}
+
+@media (max-width: 700px) {
+  .wrap {
+    width: min(100% - 1.4rem, 1160px);
+  }
+  section {
+    padding-block: 4.5rem;
+  }
+  .nav button {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.56rem;
+  }
+  .nav .logo {
+    display: none;
+  }
+  .nav {
+    gap: 0.08rem;
+    top: 10px;
+  }
+  .name {
+    font-size: clamp(2.5rem, 13vw, 4.6rem);
+  }
+  .hero {
+    align-items: flex-start;
+    padding-top: 9rem;
+    min-height: 92svh;
+  }
+  .hero-copy {
+    max-width: 100%;
+  }
+  .scroll-cue {
+    display: none;
+  }
+  .stack-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .project-cover {
+    aspect-ratio: 4 / 3;
+  }
+  .browser-main {
+    left: 4%;
+    top: 18%;
+    width: 76%;
+    height: 64%;
+  }
+  .phone-side {
+    right: 4%;
+    top: 16%;
+    width: 27%;
+    height: 69%;
+  }
+  .phone-primary {
+    left: 24%;
+    top: 8%;
+    width: 32%;
+    height: 84%;
+  }
+  .phone-secondary {
+    right: 10%;
+    top: 18%;
+    width: 28%;
+    height: 70%;
+  }
+  .cover-whatzapp .phone-primary {
+    left: 18%;
+  }
+  .contact h2 {
+    font-size: clamp(2rem, 13vw, 4rem);
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    font-size: 1rem;
+  }
+  .nav .lang-switch {
+    min-width: 34px;
+  }
+  .cta-row {
+    width: 100%;
+  }
+  .hero .btn {
+    flex: 1 1 150px;
+  }
+  .card-body {
+    padding: 1.25rem 1.15rem 1.4rem;
+  }
+  .project-cover {
+    aspect-ratio: 1 / 0.82;
+  }
+  .phone-primary {
+    left: 19%;
+    width: 36%;
+  }
+  .phone-secondary {
+    right: 5%;
+    width: 32%;
+  }
+  .browser-float {
+    width: 52%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .name .ch,
+  .hero-in {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+  .marquee-track,
+  .scroll-cue i,
+  .role .cursor {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tilt {
+    transition: none;
+  }
+}
+
+@media (hover: none) {
+  .glow {
+    display: none;
+  }
+}
+

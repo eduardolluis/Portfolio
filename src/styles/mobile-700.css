@@ -1,0 +1,367 @@
+/* ---------- Mobile-first polish ---------- */
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 74px);
+  }
+
+  body {
+    min-width: 320px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .wrap {
+    width: min(100% - 1.25rem, 1160px);
+  }
+
+  section {
+    padding-block: 4rem;
+  }
+
+  /* Keep the floating-pill identity, but make it fit a real phone. */
+  .nav {
+    top: calc(env(safe-area-inset-top, 0px) + 9px);
+    width: calc(100% - 1rem);
+    max-width: 430px;
+    justify-content: center;
+    gap: 0.06rem;
+    padding: 0.3rem;
+    overflow: visible;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav .logo,
+  .nav-stack {
+    display: none;
+  }
+
+  .nav button {
+    flex: 0 1 auto;
+    font-size: 0.74rem;
+    padding: 0.48rem 0.58rem;
+  }
+
+  .nav .lang-switch {
+    min-width: 36px;
+    padding-inline: 0.55rem;
+  }
+
+  /* Hero is intentionally composed for portrait instead of shrinking desktop. */
+  .hero {
+    min-height: 90svh;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 7.3rem);
+    padding-bottom: 3.6rem;
+    align-items: flex-start;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .hello {
+    font-size: 1rem;
+  }
+
+  .name {
+    max-width: 10.5ch;
+    font-size: clamp(2.75rem, 13.5vw, 4.3rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    margin-top: 0.5rem;
+  }
+
+  .role {
+    margin-top: 1.3rem;
+    min-height: 3.1em;
+    font-size: clamp(1.05rem, 4.7vw, 1.35rem);
+    line-height: 1.4;
+  }
+
+  .hero .lead {
+    max-width: 33rem;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-top: 0.7rem;
+  }
+
+  .availability {
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 1rem;
+    padding: 0.48rem 0.72rem;
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .hero .cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    width: 100%;
+    margin-top: 1.45rem;
+  }
+
+  .hero .btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.82rem 0.85rem;
+    font-size: 0.9rem;
+  }
+
+  .marquee {
+    padding-block: 1rem;
+  }
+
+  .marquee-track {
+    gap: 2rem;
+  }
+
+  .marquee span {
+    font-size: 1.08rem;
+  }
+
+  /* Horizontal snap keeps the page from becoming an endless tower of cards. */
+  .capabilities-grid,
+  .stack-grid {
+    display: flex;
+    gap: 0.85rem;
+    overflow-x: auto;
+    padding: 0.15rem 0.05rem 0.9rem;
+    margin-right: -0.625rem;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0.05rem;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .capabilities-grid::-webkit-scrollbar,
+  .stack-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .capability-item,
+  .stack-grid > .panel {
+    flex: 0 0 min(84vw, 340px);
+    scroll-snap-align: start;
+  }
+
+  .capability-item {
+    min-height: 168px;
+    padding: 1.2rem;
+  }
+
+  .capability-item h3 {
+    margin-top: 1.6rem;
+  }
+
+  .stack-grid {
+    margin-top: 2rem;
+  }
+
+  .stack-grid > .panel {
+    min-height: 250px;
+    padding: 1.35rem;
+  }
+
+  /* Project cards get their own mobile composition. */
+  .projects {
+    gap: 1.15rem;
+    margin-top: 2.25rem;
+  }
+
+  .card .project-panel,
+  .featured-card .project-panel {
+    display: block;
+  }
+
+  .project-cover,
+  .featured-card .project-cover {
+    min-height: 0;
+    aspect-ratio: 1.05 / 1;
+  }
+
+  .cover-gio .browser-main {
+    left: 5%;
+    top: 11%;
+    width: 87%;
+    height: 61%;
+    border-radius: 10px;
+  }
+
+  .cover-gio .phone-side {
+    right: 7%;
+    top: 40%;
+    width: 27%;
+    height: 52%;
+    transform: rotate(3deg) translateZ(85px);
+  }
+
+  .cover-melodix .phone-primary,
+  .cover-whatzapp .phone-primary {
+    left: 13%;
+    top: 7%;
+    width: 42%;
+    height: 86%;
+  }
+
+  .cover-melodix .phone-secondary,
+  .cover-whatzapp .phone-secondary {
+    right: 9%;
+    top: 16%;
+    width: 37%;
+    height: 75%;
+  }
+
+  .cover-discord .browser-main {
+    left: 4%;
+    top: 12%;
+    width: 91%;
+    height: 66%;
+  }
+
+  .cover-discord .browser-float {
+    right: 5%;
+    bottom: 8%;
+    width: 58%;
+    height: 42%;
+  }
+
+  .card-body,
+  .featured-card .card-body {
+    padding: 1.2rem 1.1rem 1.35rem;
+  }
+
+  .project-heading-row {
+    align-items: flex-start;
+  }
+
+  .project-category {
+    font-size: 0.7rem;
+  }
+
+  .card-body h3 {
+    font-size: 1.1rem;
+  }
+
+  .card-body p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .chips {
+    gap: 0.32rem;
+  }
+
+  .chips span {
+    font-size: 0.7rem;
+    padding: 0.18rem 0.55rem;
+  }
+
+  .links {
+    gap: 0.8rem 1rem;
+    font-size: 0.86rem;
+  }
+
+  /* About: keep useful signal without tripling the section height. */
+  .about-grid {
+    gap: 3rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin-top: 1.5rem;
+  }
+
+  .stat {
+    min-width: 0;
+    padding: 0.85rem 0.7rem;
+    border-radius: 15px;
+  }
+
+  .stat b {
+    font-size: 0.88rem;
+    line-height: 1.2;
+  }
+
+  .stat span {
+    font-size: 0.7rem;
+  }
+
+  .timeline {
+    gap: 1.8rem;
+    padding-left: 1.55rem;
+  }
+
+  .timeline li::before {
+    left: calc(-1.55rem - 6px);
+  }
+
+  .timeline h3 {
+    font-size: 1rem;
+  }
+
+  .timeline p {
+    font-size: 0.92rem;
+  }
+
+  /* Contact behaves like a mobile conversion panel. */
+  .contact-layout {
+    gap: 2rem;
+  }
+
+  .contact h2 {
+    max-width: 12ch;
+    font-size: clamp(2.1rem, 11.5vw, 3.55rem);
+  }
+
+  .mail {
+    margin-top: 1.4rem;
+    font-size: clamp(0.78rem, 4.2vw, 0.96rem);
+  }
+
+  .contact .cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    margin-top: 1.3rem;
+  }
+
+  .contact .cta-row .btn {
+    min-width: 0;
+    min-height: 46px;
+    padding: 0.72rem 0.55rem;
+    font-size: 0.82rem;
+  }
+
+  .contact .cta-row .btn:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .contact-form {
+    gap: 0.85rem;
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    min-height: 46px;
+    padding: 0.75rem 0.8rem;
+    font-size: 16px; /* Prevents iOS focus zoom. */
+  }
+
+  .contact-form textarea {
+    min-height: 118px;
+  }
+
+  footer {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  footer .wrap {
+    align-items: flex-start;
+  }
+}
+

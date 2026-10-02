@@ -1,0 +1,98 @@
+/* About */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+.about-text {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 1.6rem;
+  color: var(--muted);
+  max-width: 54ch;
+}
+.about-text strong {
+  color: var(--ink);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2.2rem;
+}
+.stat {
+  padding: 1.05rem;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+}
+.stat b {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 800;
+}
+.stat span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  display: block;
+  margin-top: 0.35rem;
+}
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 2rem;
+  position: relative;
+  display: grid;
+  gap: 2.4rem;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(var(--violet), var(--cyan));
+  opacity: 0.5;
+}
+.timeline li {
+  position: relative;
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: calc(-2rem - 6px);
+  top: 0.5rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--violet);
+}
+.timeline li.on::before {
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan);
+}
+.timeline time {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.timeline h3 {
+  margin: 0.2rem 0;
+}
+.timeline .where {
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.timeline p {
+  color: var(--muted);
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
