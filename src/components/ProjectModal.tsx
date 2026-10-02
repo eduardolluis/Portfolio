@@ -1,18 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "../data/content";
-
-type Labels = {
-  close: string;
-  overview: string;
-  gallery: string;
-  highlights: string;
-  role: string;
-  proof: string;
-  repository: string;
-  viewCode: string;
-  viewLive: string;
-  caseStudy: string;
-};
+import { ProjectDetails } from "./project-modal/ProjectDetails";
+import { ProjectGallery } from "./project-modal/ProjectGallery";
+import type { ProjectModalLabels } from "./project-modal/types";
 
 const focusableSelector = [
   "a[href]",
@@ -29,21 +19,20 @@ export function ProjectModal({
   onClose,
 }: {
   project: Project | null;
-  labels: Labels;
+  labels: ProjectModalLabels;
   onClose: () => void;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const touchStartX = useRef<number | null>(null);
   const dialogRef = useRef<HTMLElement | null>(null);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!project) return;
+    if (!project || project.gallery.length === 0) return;
 
     setActiveIndex(0);
-    requestAnimationFrame(() => {
+    const resetFrame = requestAnimationFrame(() => {
       if (scrollRef.current) scrollRef.current.scrollTop = 0;
     });
     previousFocusRef.current =
@@ -75,13 +64,13 @@ export function ProjectModal({
         return;
       }
 
-      if (event.key === "ArrowRight") {
+      if (project.gallery.length > 1 && event.key === "ArrowRight") {
         event.preventDefault();
         setActiveIndex((current) => (current + 1) % project.gallery.length);
         return;
       }
 
-      if (event.key === "ArrowLeft") {
+      if (project.gallery.length > 1 && event.key === "ArrowLeft") {
         event.preventDefault();
         setActiveIndex(
           (current) =>
@@ -110,6 +99,7 @@ export function ProjectModal({
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
+      cancelAnimationFrame(resetFrame);
       window.clearTimeout(focusTimer);
       document.body.style.overflow = previousBodyStyles.overflow;
       document.body.style.position = previousBodyStyles.position;
@@ -133,19 +123,7 @@ export function ProjectModal({
     });
   }, [activeIndex, project]);
 
-  if (!project) return null;
-  const active = project.gallery[activeIndex];
-
-  const showPrevious = () => {
-    setActiveIndex(
-      (current) =>
-        (current - 1 + project.gallery.length) % project.gallery.length,
-    );
-  };
-
-  const showNext = () => {
-    setActiveIndex((current) => (current + 1) % project.gallery.length);
-  };
+  if (!project || project.gallery.length === 0) return null;
 
   return (
     <div
@@ -180,161 +158,13 @@ export function ProjectModal({
 
         <div className="project-modal-scroll" ref={scrollRef}>
           <div className="project-modal-layout">
-            <div className="project-modal-visuals">
-              <div
-                id="project-gallery-stage"
-                className={`modal-stage ${active.kind === "mobile" ? "stage-mobile" : "stage-desktop"}`}
-                aria-label={`${labels.gallery}: ${active.label}`}
-                onTouchStart={(event) => {
-                  touchStartX.current = event.touches[0]?.clientX ?? null;
-                }}
-                onTouchEnd={(event) => {
-                  if (touchStartX.current == null || project.gallery.length < 2)
-                    return;
-                  const endX =
-                    event.changedTouches[0]?.clientX ?? touchStartX.current;
-                  const delta = endX - touchStartX.current;
-                  touchStartX.current = null;
-                  if (Math.abs(delta) < 48) return;
-                  if (delta < 0) showNext();
-                  else showPrevious();
-                }}
-              >
-                <img
-                  src={active.src}
-                  alt={active.alt}
-                  decoding="async"
-                  draggable={false}
-                />
-                {project.gallery.length > 1 ? (
-                  <>
-                    <button
-                      className="gallery-arrow gallery-prev"
-                      type="button"
-                      onClick={showPrevious}
-                      aria-label={`${labels.gallery}: ${project.gallery[(activeIndex - 1 + project.gallery.length) % project.gallery.length].label}`}
-                    >
-                      ←
-                    </button>
-                    <button
-                      className="gallery-arrow gallery-next"
-                      type="button"
-                      onClick={showNext}
-                      aria-label={`${labels.gallery}: ${project.gallery[(activeIndex + 1) % project.gallery.length].label}`}
-                    >
-                      →
-                    </button>
-                  </>
-                ) : null}
-              </div>
-              <div
-                className="gallery-tabs"
-                role="tablist"
-                aria-label={labels.gallery}
-              >
-                {project.gallery.map((item, index) => (
-                  <button
-                    key={`${item.src}-${item.label}`}
-                    type="button"
-                    role="tab"
-                    aria-controls="project-gallery-stage"
-                    aria-selected={index === activeIndex}
-                    className={index === activeIndex ? "active" : ""}
-                    onClick={() => setActiveIndex(index)}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-              {project.previewNote ? (
-                <p className="gallery-origin-note">{project.previewNote}</p>
-              ) : null}
-            </div>
-
-            <div className="project-modal-copy">
-              <span className="modal-section-label">{labels.overview}</span>
-              <p className="modal-description">{project.description}</p>
-
-              {project.facts?.length ? (
-                <div className="project-facts" aria-label={labels.proof}>
-                  {project.facts.map((fact) => (
-                    <div className="project-fact" key={`${fact.label}-${fact.value}`}>
-                      <span>{fact.label}</span>
-                      <strong>{fact.value}</strong>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-
-              <div className="modal-detail-block">
-                <span className="modal-section-label">{labels.highlights}</span>
-                <ul className="modal-highlights">
-                  {project.highlights.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-
-              {project.role ? (
-                <div className="modal-detail-block">
-                  <span className="modal-section-label">{labels.role}</span>
-                  <p className="modal-role">{project.role}</p>
-                </div>
-              ) : null}
-
-              <div className="modal-detail-block">
-                <span className="modal-section-label">Stack</span>
-                <div className="chips modal-chips">
-                  {project.stack.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
-                </div>
-              </div>
-
-              {project.repositoryNote ? (
-                <div className="modal-detail-block">
-                  <span className="modal-section-label">{labels.repository}</span>
-                  <p className="repository-note">{project.repositoryNote}</p>
-                </div>
-              ) : null}
-
-              {project.disclaimer ? (
-                <p className="project-note modal-note">{project.disclaimer}</p>
-              ) : null}
-
-              <div className="modal-links">
-                {project.caseStudy ? (
-                  <a
-                    className="btn primary"
-                    href={project.caseStudy}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {labels.caseStudy}
-                  </a>
-                ) : null}
-                {project.live ? (
-                  <a
-                    className="btn"
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {labels.viewLive}
-                  </a>
-                ) : null}
-                {project.github ? (
-                  <a
-                    className="btn"
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {labels.viewCode} ↗
-                  </a>
-                ) : null}
-              </div>
-            </div>
+            <ProjectGallery
+              project={project}
+              labels={labels}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+            />
+            <ProjectDetails project={project} labels={labels} />
           </div>
         </div>
       </section>
