@@ -559,6 +559,11 @@ footer,
   object-fit: cover;
   display: block;
 }
+.phone-shot {
+  border-radius: 22px;
+  border-width: 3px;
+  border-color: rgba(255, 255, 255, 0.85);
+}
 .browser-main {
   left: 6%;
   top: 16%;
@@ -574,11 +579,6 @@ footer,
   height: 48%;
   border-radius: 12px;
   transform: rotate(4deg) translateZ(85px);
-}
-.phone-shot {
-  border-radius: 22px;
-  border-width: 3px;
-  border-color: rgba(255, 255, 255, 0.85);
 }
 .phone-side {
   right: 7%;
@@ -772,16 +772,16 @@ footer,
 
 /* Contact */
 .contact {
-  text-align: center;
+  text-align: left;
   padding-bottom: 6rem;
 }
 .contact h2 {
   font-size: clamp(2.2rem, 7vw, 5rem);
-  max-width: 15ch;
-  margin-inline: auto;
+  max-width: 12ch;
+  margin-inline: 0;
 }
 .contact .lead {
-  margin: 1.4rem auto 0;
+  margin: 1.4rem 0 0;
 }
 .mail {
   display: inline-block;
@@ -800,7 +800,7 @@ footer,
   padding-bottom: 0.2rem;
 }
 .contact .cta-row {
-  justify-content: center;
+  justify-content: flex-start;
 }
 footer {
   border-top: 1px solid var(--line);
@@ -1127,8 +1127,6 @@ footer button {
   width: min(1180px, 100%);
   max-height: min(90vh, 900px);
   padding: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
   border-radius: 28px;
   border: 1px solid rgba(160, 150, 255, 0.28);
   background: linear-gradient(
@@ -1205,26 +1203,20 @@ footer button {
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
 }
 .modal-stage.stage-mobile img {
-  width: auto;
-  max-width: min(70%, 360px);
-  max-height: 600px;
+  width: 100%;
+  max-width: none;
+  max-height: none;
   object-fit: contain;
+  display: block;
   border-radius: 22px;
   border: 3px solid rgba(255, 255, 255, 0.88);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
 }
 .modal-stage.stage-mobile {
-  width: min(360px, 100%);
   min-height: 0;
   height: auto;
   margin-inline: auto;
   padding: 0;
-}
-.modal-stage.stage-mobile img {
-  width: 100%;
-  max-width: none;
-  max-height: none;
-  display: block;
 }
 .gallery-arrow {
   position: absolute;
@@ -1321,9 +1313,6 @@ footer button {
 }
 
 /* Contact form */
-.contact {
-  text-align: left;
-}
 .contact-layout {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
@@ -1333,16 +1322,6 @@ footer button {
 .contact-copy {
   position: sticky;
   top: 7rem;
-}
-.contact h2 {
-  margin-inline: 0;
-  max-width: 12ch;
-}
-.contact .lead {
-  margin: 1.4rem 0 0;
-}
-.contact .cta-row {
-  justify-content: flex-start;
 }
 .contact-form {
   padding: clamp(1.3rem, 3vw, 2rem);
@@ -2014,8 +1993,16 @@ footer button {
 }
 .cover-rabbit .cover-glow {
   background:
-    radial-gradient(circle at 18% 18%, rgba(241, 50, 18, 0.82), transparent 40%),
-    radial-gradient(circle at 82% 82%, rgba(255, 255, 255, 0.22), transparent 45%);
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(241, 50, 18, 0.82),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 82% 82%,
+      rgba(255, 255, 255, 0.22),
+      transparent 45%
+    );
 }
 .cover-rabbit .browser-main {
   left: 5%;
@@ -2042,7 +2029,6 @@ footer button {
   object-fit: cover;
   object-position: top left;
 }
-
 
 .cover-multistore {
   background: #131827;
@@ -2201,7 +2187,9 @@ footer button {
     width: min(360px, 100%);
   }
 }
-.project-modal-scroll { flex: 1 1 auto; }
+.project-modal-scroll {
+  flex: 1 1 auto;
+}
 
 /* GIO cover — keep the full dashboard visible */
 .cover-gio .browser-main img {
