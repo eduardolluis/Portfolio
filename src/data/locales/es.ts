@@ -184,6 +184,7 @@ export const es = {
         ],
         stack: ["Next.js", "React", "TypeScript", "Socket.IO", "Prisma", "MySQL", "Clerk", "LiveKit", "UploadThing"],
         github: "https://github.com/eduardolluis/discord-clone",
+        live: "https://discord-clone-brown-kappa.vercel.app/",
         visual: "discord",
       },
       {
