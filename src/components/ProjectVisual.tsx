@@ -71,11 +71,21 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
   return (
     <div className="project-cover cover-multistore">
       <div className="cover-glow" />
-      <div className="phone-shot phone-primary">
-        <img src="/images/projects/multistore/home.webp" alt="Multi Store customer home" loading="lazy" decoding="async" />
+      <div className="browser-shot browser-main">
+        <img
+          src="https://github.com/user-attachments/assets/3c2c9027-c0a7-40d3-b72b-23a280ea0800"
+          alt="Discord Clone community interface"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
-      <div className="phone-shot phone-secondary">
-        <img src="/images/projects/multistore/manage-products.webp" alt="Multi Store product management" loading="lazy" decoding="async" />
+      <div className="browser-shot rabbit-admin-shot">
+        <img
+          src="https://github.com/user-attachments/assets/d3236764-0843-44bd-90c6-a99bc8160326"
+          alt="Discord Clone real-time chat"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   );
