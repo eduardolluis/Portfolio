@@ -50,7 +50,7 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
         <div className="cover-glow" />
         <div className="browser-shot browser-main">
           <img
-            src="/images/projects/rabbit/storefront.svg"
+            src="https://github.com/user-attachments/assets/2b21d3d7-6563-4715-bf93-e4cad7a0074c"
             alt="Rabbit e-commerce storefront"
             loading="lazy"
             decoding="async"
