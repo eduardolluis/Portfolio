@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#fff"/>
+<rect width="1600" height="48" fill="#f13212"/>
+<text x="800" y="30" font-family="Arial,sans-serif" font-size="16" text-anchor="middle" fill="#fff">We ship worldwide - Fast and reliable shipping!</text>
+<text x="1450" y="30" font-family="Arial,sans-serif" font-size="16" fill="#fff">849 519 1571</text>
+<rect y="48" width="1600" height="74" fill="#fff"/>
+<line x1="0" y1="122" x2="1600" y2="122" stroke="#e5e7eb"/>
+<text x="115" y="92" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#111827">Rabbit</text>
+<text x="610" y="92" font-family="Arial,sans-serif" font-size="16" fill="#263244">MEN</text>
+<text x="690" y="92" font-family="Arial,sans-serif" font-size="16" fill="#263244">WOMEN</text>
+<text x="785" y="92" font-family="Arial,sans-serif" font-size="16" fill="#263244">TOP WEAR</text>
+<text x="910" y="92" font-family="Arial,sans-serif" font-size="16" fill="#263244">BOTTOM WEAR</text>
+
+<text x="130" y="185" font-family="Arial,sans-serif" font-size="22" fill="#334155">Filter</text>
+<text x="330" y="185" font-family="Arial,sans-serif" font-size="30" fill="#111827">ALL COLLECTIONS</text>
+<text x="130" y="235" font-family="Arial,sans-serif" font-size="16" fill="#64748b">Category</text>
+<circle cx="145" cy="270" r="10" fill="#fff" stroke="#94a3b8"/><text x="168" y="276" font-family="Arial,sans-serif" font-size="16" fill="#334155">Top Wear</text>
+<circle cx="145" cy="305" r="10" fill="#fff" stroke="#94a3b8"/><text x="168" y="311" font-family="Arial,sans-serif" font-size="16" fill="#334155">Bottom Wear</text>
+<text x="130" y="360" font-family="Arial,sans-serif" font-size="16" fill="#64748b">Gender</text>
+<circle cx="145" cy="395" r="10" fill="#fff" stroke="#94a3b8"/><text x="168" y="401" font-family="Arial,sans-serif" font-size="16" fill="#334155">Men</text>
+<circle cx="145" cy="430" r="10" fill="#fff" stroke="#94a3b8"/><text x="168" y="436" font-family="Arial,sans-serif" font-size="16" fill="#334155">Women</text>
+
+<g>
+<rect x="330" y="235" width="320" height="470" rx="14" fill="#fff" stroke="#e5e7eb"/>
+<rect x="348" y="255" width="284" height="320" rx="10" fill="#273444"/>
+<rect x="375" y="285" width="80" height="150" rx="6" fill="#0f172a"/><rect x="470" y="285" width="80" height="150" rx="6" fill="#f8fafc"/>
+<text x="350" y="620" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#111827">Classic Oxford Shirt</text>
+<text x="350" y="655" font-family="Arial,sans-serif" font-size="17" fill="#64748b">$39.99</text>
+</g>
+
+<g>
+<rect x="680" y="235" width="320" height="470" rx="14" fill="#fff" stroke="#e5e7eb"/>
+<rect x="698" y="255" width="284" height="320" rx="10" fill="#dbe4eb"/>
+<path d="M790 310 L860 290 L900 380 L870 510 L770 510 L740 380 Z" fill="#4b6b82"/>
+<text x="700" y="620" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#111827">Slim-Fit Stretch Shirt</text>
+<text x="700" y="655" font-family="Arial,sans-serif" font-size="17" fill="#64748b">$29.99</text>
+</g>
+
+<g>
+<rect x="1030" y="235" width="320" height="470" rx="14" fill="#fff" stroke="#e5e7eb"/>
+<rect x="1048" y="255" width="284" height="320" rx="10" fill="#7dd3fc"/>
+<circle cx="1185" cy="390" r="52" fill="#e2e8f0"/><rect x="1140" y="430" width="95" height="65" rx="8" fill="#2563eb"/>
+<text x="1050" y="620" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#111827">Casual Denim Shirt</text>
+<text x="1050" y="655" font-family="Arial,sans-serif" font-size="17" fill="#64748b">$49.99</text>
+</g>
+</svg>
