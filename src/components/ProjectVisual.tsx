@@ -43,6 +43,31 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
     );
   }
 
+
+  if (type === "rabbit") {
+    return (
+      <div className="project-cover cover-rabbit">
+        <div className="cover-glow" />
+        <div className="browser-shot browser-main">
+          <img
+            src="https://github.com/user-attachments/assets/2b21d3d7-6563-4715-bf93-e4cad7a0074c"
+            alt="Rabbit e-commerce storefront"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div className="browser-shot rabbit-admin-shot">
+          <img
+            src="https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/admin-dashboard.svg"
+            alt="Rabbit admin dashboard"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="project-cover cover-multistore">
       <div className="cover-glow" />

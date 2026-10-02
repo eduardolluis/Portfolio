@@ -16,7 +16,7 @@ export type Project = {
   github?: string;
   live?: string;
   caseStudy?: string;
-  visual: "gio" | "melodix" | "whatzapp" | "multistore";
+  visual: "gio" | "melodix" | "whatzapp" | "multistore" | "rabbit";
   disclaimer?: string;
   facts?: ProjectFact[];
   role?: string;
@@ -95,7 +95,7 @@ export const content = {
     },
     projects: {
       title: "Selected work",
-      lead: "Four projects that show how I work across business software, mobile products, real-time systems and e-commerce.",
+      lead: "Five projects that show how I work across business software, mobile products, real-time systems and e-commerce.",
       viewCode: "View source",
       viewLive: "Live demo",
       caseStudy: "Case study",
@@ -221,6 +221,38 @@ export const content = {
           stack: ["Flutter", "Dart", "Firebase", "Firestore", "Stripe", "Provider"],
           visual: "multistore",
         },
+        {
+          id: "rabbit",
+          title: "Rabbit",
+          category: "Full-stack e-commerce platform",
+          description: "A modern fashion e-commerce platform with product discovery, authentication, cart management, checkout, order history and a dedicated admin experience.",
+          highlights: [
+            "Responsive storefront with product browsing, filtering, product details and cart flows",
+            "Authentication, customer profiles, checkout and order history",
+            "Admin dashboard for users, products and order management",
+          ],
+          facts: [
+            { label: "Frontend", value: "Next.js + React" },
+            { label: "Backend", value: "Express + MongoDB" },
+            { label: "Admin", value: "Users, products & orders" },
+          ],
+          role: "Built the storefront, state management, authentication flows, backend API structure, checkout experience and admin dashboard.",
+          repositoryNote: "Public repository. The portfolio deployment includes resilient demo fallbacks when the legacy API is unavailable.",
+          gallery: [
+            { src: "https://github.com/user-attachments/assets/2b21d3d7-6563-4715-bf93-e4cad7a0074c", alt: "Rabbit fashion e-commerce storefront", label: "Storefront", kind: "desktop" },
+            { src: "https://github.com/user-attachments/assets/8161e4d8-99cd-458b-9e3d-44c5d72f9233", alt: "Rabbit product collection browsing screen", label: "Collection", kind: "desktop" },
+            { src: "https://github.com/user-attachments/assets/39e2311d-2f3c-44a4-8e85-99d53c74c244", alt: "Rabbit product detail screen", label: "Product", kind: "desktop" },
+            { src: "https://github.com/user-attachments/assets/dcb83317-a1f7-4e49-b988-bc8cf020572c", alt: "Rabbit shopping cart drawer", label: "Cart", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/profile.svg", alt: "Rabbit customer profile and order history", label: "Profile", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/checkout.svg", alt: "Rabbit checkout flow and order summary", label: "Checkout", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/order-details.svg", alt: "Rabbit order details and delivery status", label: "Order details", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/admin-dashboard.svg", alt: "Rabbit admin dashboard", label: "Admin", kind: "desktop" },
+          ],
+          stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Express", "MongoDB", "Tailwind CSS"],
+          github: "https://github.com/eduardolluis/rabbit-app",
+          live: "https://rabbit-app-coral.vercel.app/",
+          visual: "rabbit",
+        },
       ] as Project[],
     },
     about: {
@@ -339,7 +371,7 @@ export const content = {
     },
     projects: {
       title: "Trabajo seleccionado",
-      lead: "Cuatro proyectos que muestran mi trabajo en software empresarial, apps móviles, sistemas en tiempo real y e-commerce.",
+      lead: "Cinco proyectos que muestran mi trabajo en software empresarial, apps móviles, sistemas en tiempo real y e-commerce.",
       viewCode: "Ver código",
       viewLive: "Demo",
       caseStudy: "Caso de estudio",
@@ -464,6 +496,38 @@ export const content = {
           ],
           stack: ["Flutter", "Dart", "Firebase", "Firestore", "Stripe", "Provider"],
           visual: "multistore",
+        },
+        {
+          id: "rabbit",
+          title: "Rabbit",
+          category: "Plataforma e-commerce full-stack",
+          description: "Plataforma moderna de e-commerce de moda con catálogo, autenticación, carrito, checkout, historial de pedidos y una experiencia administrativa dedicada.",
+          highlights: [
+            "Tienda responsive con catálogo, filtros, detalle de producto y carrito",
+            "Autenticación, perfiles de cliente, checkout e historial de pedidos",
+            "Dashboard administrativo para usuarios, productos y pedidos",
+          ],
+          facts: [
+            { label: "Frontend", value: "Next.js + React" },
+            { label: "Backend", value: "Express + MongoDB" },
+            { label: "Admin", value: "Usuarios, productos y pedidos" },
+          ],
+          role: "Construí la tienda, manejo de estado, flujos de autenticación, estructura de API backend, experiencia de checkout y panel administrativo.",
+          repositoryNote: "Repositorio público. El demo del portfolio incluye fallbacks resilientes cuando la API legacy no está disponible.",
+          gallery: [
+            { src: "https://github.com/user-attachments/assets/2b21d3d7-6563-4715-bf93-e4cad7a0074c", alt: "Tienda e-commerce Rabbit", label: "Tienda", kind: "desktop" },
+            { src: "https://github.com/user-attachments/assets/8161e4d8-99cd-458b-9e3d-44c5d72f9233", alt: "Catálogo de productos de Rabbit", label: "Catálogo", kind: "desktop" },
+            { src: "https://github.com/user-attachments/assets/39e2311d-2f3c-44a4-8e85-99d53c74c244", alt: "Detalle de producto de Rabbit", label: "Producto", kind: "desktop" },
+            { src: "https://github.com/user-attachments/assets/dcb83317-a1f7-4e49-b988-bc8cf020572c", alt: "Carrito de compras de Rabbit", label: "Carrito", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/profile.svg", alt: "Perfil e historial de pedidos de Rabbit", label: "Perfil", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/checkout.svg", alt: "Checkout y resumen de pedido de Rabbit", label: "Checkout", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/order-details.svg", alt: "Detalles de pedido y estado de entrega en Rabbit", label: "Detalle del pedido", kind: "desktop" },
+            { src: "https://raw.githubusercontent.com/eduardolluis/rabbit-app/main/docs/admin-dashboard.svg", alt: "Dashboard administrativo de Rabbit", label: "Admin", kind: "desktop" },
+          ],
+          stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Express", "MongoDB", "Tailwind CSS"],
+          github: "https://github.com/eduardolluis/rabbit-app",
+          live: "https://rabbit-app-coral.vercel.app/",
+          visual: "rabbit",
         },
       ] as Project[],
     },
