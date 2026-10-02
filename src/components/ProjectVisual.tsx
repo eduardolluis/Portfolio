@@ -81,8 +81,8 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
       </div>
       <div className="browser-shot rabbit-admin-shot">
         <img
-          src="https://github.com/user-attachments/assets/d3236764-0843-44bd-90c6-a99bc8160326"
-          alt="Discord Clone real-time chat"
+          src="https://github.com/user-attachments/assets/b4cff841-570b-4a80-8d2e-678349168e6a"
+          alt="Discord Clone voice and video room"
           loading="lazy"
           decoding="async"
         />
