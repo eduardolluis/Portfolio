@@ -219,6 +219,7 @@ export const content = {
             { src: "/images/projects/multistore/manage-products.webp", alt: "Multi Store supplier product management screen with search, stock and edit actions", label: "Manage products", kind: "mobile" },
           ],
           stack: ["Flutter", "Dart", "Firebase", "Firestore", "Stripe", "Provider"],
+          github: "https://github.com/eduardolluis/multi-store-app",
           visual: "multistore",
         },
         {
@@ -495,6 +496,7 @@ export const content = {
             { src: "/images/projects/multistore/manage-products.webp", alt: "Gestión de productos de Multi Store con búsqueda, stock y acciones de edición", label: "Gestionar productos", kind: "mobile" },
           ],
           stack: ["Flutter", "Dart", "Firebase", "Firestore", "Stripe", "Provider"],
+          github: "https://github.com/eduardolluis/multi-store-app",
           visual: "multistore",
         },
         {
