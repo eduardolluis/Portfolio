@@ -70,13 +70,13 @@ test("Internationalization (EN / ES Parity)", async (t) => {
   );
 
 
-  await t.test("Multi Store replaces Discord and exposes a real project gallery", () => {
-    const multi = en.projects.items.find((project) => project.id === "multistore");
-    assert.ok(multi);
-    assert.ok(multi.gallery.some((shot) => shot.label === "Home"));
-    assert.ok(multi.gallery.some((shot) => shot.label === "Login"));
-    assert.ok(multi.previewNote);
-    assert.equal(en.projects.items.some((project) => project.id === "discord"), false);
+  await t.test("Discord Clone exposes a real project gallery", () => {
+    const discord = en.projects.items.find((project) => project.id === "discord");
+    assert.ok(discord);
+    assert.ok(discord.gallery.some((shot) => shot.label === "Chat"));
+    assert.ok(discord.gallery.some((shot) => shot.label === "Voice & video"));
+    assert.match(discord.github ?? "", /discord-clone/);
+    assert.equal(en.projects.items.some((project) => project.id === "multistore"), false);
   });
 
   await t.test("Capabilities expose the active service categories", () => {
