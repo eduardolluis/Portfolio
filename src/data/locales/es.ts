@@ -24,6 +24,7 @@ export const es = {
     ],
   },
   stack: {
+    eyebrow: "Stack / Herramientas",
     title: "Mi caja de herramientas",
     lead: "Tecnologías que he usado en proyectos reales, agrupadas según su función dentro del producto.",
     groups: [
@@ -58,6 +59,7 @@ export const es = {
     ],
   },
   projects: {
+    eyebrow: "Casos / Proyectos seleccionados",
     title: "Trabajo seleccionado",
     lead: "Cinco proyectos que muestran mi trabajo en software empresarial, apps móviles, sistemas en tiempo real y e-commerce.",
     viewCode: "Ver código",
@@ -207,16 +209,16 @@ export const es = {
         role: "Construí la tienda, manejo de estado, flujos de autenticación, estructura de API backend, experiencia de checkout y panel administrativo.",
         repositoryNote: "Repositorio público. El demo del portfolio incluye fallbacks resilientes cuando la API legacy no está disponible.",
         gallery: [
-          { src: "/images/projects/rabbit/home.png", alt: "Inicio de la tienda Rabbit", label: "Inicio", kind: "desktop" },
-          { src: "/images/projects/rabbit/collections.png", alt: "Colecciones de mujer y hombre en Rabbit", label: "Colecciones", kind: "desktop" },
-          { src: "/images/projects/rabbit/new-arrivals.png", alt: "Sección de nuevos productos de Rabbit", label: "Novedades", kind: "desktop" },
-          { src: "/images/projects/rabbit/product-detail.png", alt: "Detalle de producto de Rabbit", label: "Producto", kind: "desktop" },
-          { src: "/images/projects/rabbit/cart.png", alt: "Carrito de compras de Rabbit", label: "Carrito", kind: "desktop" },
-          { src: "/images/projects/rabbit/checkout.png", alt: "Checkout de Rabbit", label: "Checkout", kind: "desktop" },
-          { src: "/images/projects/rabbit/order-details.png", alt: "Detalle de pedido de Rabbit", label: "Pedido", kind: "desktop" },
-          { src: "/images/projects/rabbit/admin-users.png", alt: "Gestión de usuarios en Rabbit", label: "Admin Usuarios", kind: "desktop" },
-          { src: "/images/projects/rabbit/admin-products.png", alt: "Gestión de productos en Rabbit", label: "Admin Productos", kind: "desktop" },
-          { src: "/images/projects/rabbit/admin-orders.png", alt: "Gestión de pedidos en Rabbit", label: "Admin Pedidos", kind: "desktop" },
+          { src: "/images/projects/rabbit/home.webp", alt: "Inicio de la tienda Rabbit", label: "Inicio", kind: "desktop" },
+          { src: "/images/projects/rabbit/collections.webp", alt: "Colecciones de mujer y hombre en Rabbit", label: "Colecciones", kind: "desktop" },
+          { src: "/images/projects/rabbit/new-arrivals.webp", alt: "Sección de nuevos productos de Rabbit", label: "Novedades", kind: "desktop" },
+          { src: "/images/projects/rabbit/product-detail.webp", alt: "Detalle de producto de Rabbit", label: "Producto", kind: "desktop" },
+          { src: "/images/projects/rabbit/cart.webp", alt: "Carrito de compras de Rabbit", label: "Carrito", kind: "desktop" },
+          { src: "/images/projects/rabbit/checkout.webp", alt: "Checkout de Rabbit", label: "Checkout", kind: "desktop" },
+          { src: "/images/projects/rabbit/order-details.webp", alt: "Detalle de pedido de Rabbit", label: "Pedido", kind: "desktop" },
+          { src: "/images/projects/rabbit/admin-users.webp", alt: "Gestión de usuarios en Rabbit", label: "Admin Usuarios", kind: "desktop" },
+          { src: "/images/projects/rabbit/admin-products.webp", alt: "Gestión de productos en Rabbit", label: "Admin Productos", kind: "desktop" },
+          { src: "/images/projects/rabbit/admin-orders.webp", alt: "Gestión de pedidos en Rabbit", label: "Admin Pedidos", kind: "desktop" },
         ],
         stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Express", "MongoDB", "Tailwind CSS"],
         github: "https://github.com/eduardolluis/rabbit-app",
@@ -226,6 +228,7 @@ export const es = {
     ] as Project[],
   },
   about: {
+    eyebrow: "Perfil / Experiencia",
     title: "Un poco sobre mí",
     paragraphs: [
       "Soy estudiante de Ingeniería de Software en INTEC y desarrollador full-stack freelance en Santo Domingo, República Dominicana.",
@@ -258,6 +261,8 @@ export const es = {
     ],
   },
   contact: {
+    eyebrow: "Contacto / Construyamos",
+    online: "Disponible ahora",
     title: "¿Tienes un proyecto en mente?",
     lead: "Cuéntame qué estás construyendo. Estoy disponible para freelance, pasantías, roles junior y colaboraciones.",
     copy: "Copiar correo",

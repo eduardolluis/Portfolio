@@ -9,17 +9,36 @@ export function ProjectsSection({
   onSelectProject: (project: Project) => void;
 }) {
   return (
-    <section id="projects">
+    <section id="projects" className="projects-section motion-section" data-motion-section>
+      <div className="section-atmosphere projects-atmosphere" aria-hidden="true">
+        <span className="project-orbit project-orbit-a" />
+        <span className="project-orbit project-orbit-b" />
+      </div>
       <div className="wrap">
-        <h2 className="reveal">{t.projects.title}</h2>
-        <p className="lead reveal d1 section-lead">{t.projects.lead}</p>
+        <div className="projects-heading-grid">
+          <div>
+            <span className="section-kicker reveal">{t.projects.eyebrow}</span>
+            <h2 className="reveal d1">{t.projects.title}</h2>
+            <p className="lead reveal d2 section-lead">{t.projects.lead}</p>
+          </div>
+          <div className="projects-counter reveal d2" aria-hidden="true">
+            <strong>{String(t.projects.items.length).padStart(2, "0")}</strong>
+            <span>01 — {String(t.projects.items.length).padStart(2, "0")}</span>
+            <i />
+          </div>
+        </div>
         <div className="projects">
           {t.projects.items.map((project, index) => (
             <article
-              className={`card reveal ${index % 2 ? "d1" : ""} ${index === 0 ? "featured-card" : ""}`}
+              className={`card project-card reveal ${index % 2 ? "d1" : ""} ${index === 0 ? "featured-card" : ""}`}
+              data-project-index={index + 1}
               key={project.id}
             >
-              <div className="panel tilt project-panel" data-tilt>
+              <div className="project-ghost-index" aria-hidden="true">
+                0{index + 1}
+              </div>
+              <div className="panel tilt project-panel" data-tilt data-parallax-card>
+                <span className="project-accent-line" aria-hidden="true" />
                 <ProjectVisual type={project.visual} />
                 <div className="card-body">
                   <span className="project-category">{project.category}</span>
@@ -78,7 +97,7 @@ export function ProjectsSection({
           ))}
         </div>
         <a
-          className="more-projects reveal"
+          className="more-projects reveal magnetic"
           href={site.github}
           target="_blank"
           rel="noopener noreferrer"

@@ -318,6 +318,9 @@
   .mail {
     margin-top: 1.4rem;
     font-size: clamp(0.78rem, 4.2vw, 0.96rem);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .contact .cta-row {

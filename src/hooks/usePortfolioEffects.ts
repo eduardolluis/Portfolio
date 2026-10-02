@@ -1,5 +1,6 @@
 import type { Lang } from "../data/content";
 import { usePointerEffects } from "./portfolio/usePointerEffects";
+import { usePremiumMotion } from "./portfolio/usePremiumMotion";
 import { useRevealAnimations } from "./portfolio/useRevealAnimations";
 import { useScrollTracking } from "./portfolio/useScrollTracking";
 import { useTypedRoles } from "./portfolio/useTypedRoles";
@@ -25,6 +26,7 @@ export function usePortfolioEffects(lang: Lang, roles: string[]) {
 
   useRevealAnimations(lang);
   usePointerEffects(lang);
+  usePremiumMotion();
 
   return { activeId, marqueeItems, scrollTo, typedText };
 }

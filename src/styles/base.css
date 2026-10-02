@@ -94,6 +94,7 @@ section {
   z-index: 0;
   display: block;
   pointer-events: none;
+  transform: translateZ(0);
 }
 main,
 footer,

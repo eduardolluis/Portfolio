@@ -20,40 +20,70 @@ export function usePointerEffects(lang: Lang) {
     const cleanups: Array<() => void> = [];
 
     tiltItems.forEach((element) => {
-      const move = (event: MouseEvent) => {
-        const rect = element.getBoundingClientRect();
+      let rect = element.getBoundingClientRect();
+      let frame = 0;
+      let lastEvent: MouseEvent | null = null;
+      const enter = () => { rect = element.getBoundingClientRect(); };
+      const paint = () => {
+        frame = 0;
+        const event = lastEvent;
+        if (!event) return;
         const x = (event.clientX - rect.left) / rect.width;
         const y = (event.clientY - rect.top) / rect.height;
         element.style.setProperty("--mx", `${x * 100}%`);
         element.style.setProperty("--my", `${y * 100}%`);
-        element.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 8}deg) rotateY(${(x - 0.5) * 10}deg) translateZ(0)`;
+        element.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 4.5}deg) rotateY(${(x - 0.5) * 5.5}deg) translateZ(0)`;
+      };
+      const move = (event: MouseEvent) => {
+        lastEvent = event;
+        if (!frame) frame = requestAnimationFrame(paint);
       };
       const leave = () => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+        lastEvent = null;
         element.style.transform = "";
       };
-      element.addEventListener("mousemove", move);
+      element.addEventListener("mouseenter", enter);
+      element.addEventListener("mousemove", move, { passive: true });
       element.addEventListener("mouseleave", leave);
       cleanups.push(() => {
         leave();
+        element.removeEventListener("mouseenter", enter);
         element.removeEventListener("mousemove", move);
         element.removeEventListener("mouseleave", leave);
       });
     });
 
     magneticItems.forEach((element) => {
-      const move = (event: MouseEvent) => {
-        const rect = element.getBoundingClientRect();
+      let rect = element.getBoundingClientRect();
+      let frame = 0;
+      let lastEvent: MouseEvent | null = null;
+      const enter = () => { rect = element.getBoundingClientRect(); };
+      const paint = () => {
+        frame = 0;
+        const event = lastEvent;
+        if (!event) return;
         const dx = event.clientX - (rect.left + rect.width / 2);
         const dy = event.clientY - (rect.top + rect.height / 2);
-        element.style.transform = `translate(${dx * 0.2}px, ${dy * 0.26}px)`;
+        element.style.transform = `translate(${dx * 0.12}px, ${dy * 0.14}px)`;
+      };
+      const move = (event: MouseEvent) => {
+        lastEvent = event;
+        if (!frame) frame = requestAnimationFrame(paint);
       };
       const leave = () => {
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+        lastEvent = null;
         element.style.transform = "";
       };
-      element.addEventListener("mousemove", move);
+      element.addEventListener("mouseenter", enter);
+      element.addEventListener("mousemove", move, { passive: true });
       element.addEventListener("mouseleave", leave);
       cleanups.push(() => {
         leave();
+        element.removeEventListener("mouseenter", enter);
         element.removeEventListener("mousemove", move);
         element.removeEventListener("mouseleave", leave);
       });
@@ -70,11 +100,24 @@ export function usePointerEffects(lang: Lang) {
 
     const glow = document.querySelector<HTMLElement>(".glow");
     if (!glow) return;
-    const move = (event: MouseEvent) => {
+
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    const paint = () => {
+      frame = 0;
       glow.style.opacity = "1";
-      glow.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+      glow.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    };
+    const move = (event: MouseEvent) => {
+      x = event.clientX;
+      y = event.clientY;
+      if (!frame) frame = requestAnimationFrame(paint);
     };
     window.addEventListener("mousemove", move, { passive: true });
-    return () => window.removeEventListener("mousemove", move);
+    return () => {
+      window.removeEventListener("mousemove", move);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 }

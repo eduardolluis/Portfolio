@@ -24,6 +24,7 @@ export const en = {
     ],
   },
   stack: {
+    eyebrow: "Stack / Toolbox",
     title: "My toolbox",
     lead: "Technologies I have used in real projects, grouped by where they fit in the product.",
     groups: [
@@ -58,6 +59,7 @@ export const en = {
     ],
   },
   projects: {
+    eyebrow: "Case studies / Selected builds",
     title: "Selected work",
     lead: "Five projects that show how I work across business software, mobile products, real-time systems and e-commerce.",
     viewCode: "View source",
@@ -207,16 +209,16 @@ export const en = {
         role: "Built the storefront, state management, authentication flows, backend API structure, checkout experience and admin dashboard.",
         repositoryNote: "Public repository. The portfolio deployment includes resilient demo fallbacks when the legacy API is unavailable.",
         gallery: [
-          { src: "/images/projects/rabbit/home.png", alt: "Rabbit home storefront hero", label: "Home", kind: "desktop" },
-          { src: "/images/projects/rabbit/collections.png", alt: "Rabbit women and men collections", label: "Collections", kind: "desktop" },
-          { src: "/images/projects/rabbit/new-arrivals.png", alt: "Rabbit new arrivals section", label: "New Arrivals", kind: "desktop" },
-          { src: "/images/projects/rabbit/product-detail.png", alt: "Rabbit product detail screen", label: "Product Detail", kind: "desktop" },
-          { src: "/images/projects/rabbit/cart.png", alt: "Rabbit shopping cart drawer", label: "Cart", kind: "desktop" },
-          { src: "/images/projects/rabbit/checkout.png", alt: "Rabbit checkout screen", label: "Checkout", kind: "desktop" },
-          { src: "/images/projects/rabbit/order-details.png", alt: "Rabbit order details screen", label: "Order Details", kind: "desktop" },
-          { src: "/images/projects/rabbit/admin-users.png", alt: "Rabbit admin user management", label: "Admin Users", kind: "desktop" },
-          { src: "/images/projects/rabbit/admin-products.png", alt: "Rabbit admin product management", label: "Admin Products", kind: "desktop" },
-          { src: "/images/projects/rabbit/admin-orders.png", alt: "Rabbit admin order management", label: "Admin Orders", kind: "desktop" },
+          { src: "/images/projects/rabbit/home.webp", alt: "Rabbit home storefront hero", label: "Home", kind: "desktop" },
+          { src: "/images/projects/rabbit/collections.webp", alt: "Rabbit women and men collections", label: "Collections", kind: "desktop" },
+          { src: "/images/projects/rabbit/new-arrivals.webp", alt: "Rabbit new arrivals section", label: "New Arrivals", kind: "desktop" },
+          { src: "/images/projects/rabbit/product-detail.webp", alt: "Rabbit product detail screen", label: "Product Detail", kind: "desktop" },
+          { src: "/images/projects/rabbit/cart.webp", alt: "Rabbit shopping cart drawer", label: "Cart", kind: "desktop" },
+          { src: "/images/projects/rabbit/checkout.webp", alt: "Rabbit checkout screen", label: "Checkout", kind: "desktop" },
+          { src: "/images/projects/rabbit/order-details.webp", alt: "Rabbit order details screen", label: "Order Details", kind: "desktop" },
+          { src: "/images/projects/rabbit/admin-users.webp", alt: "Rabbit admin user management", label: "Admin Users", kind: "desktop" },
+          { src: "/images/projects/rabbit/admin-products.webp", alt: "Rabbit admin product management", label: "Admin Products", kind: "desktop" },
+          { src: "/images/projects/rabbit/admin-orders.webp", alt: "Rabbit admin order management", label: "Admin Orders", kind: "desktop" },
         ],
         stack: ["Next.js", "React", "TypeScript", "Redux Toolkit", "Express", "MongoDB", "Tailwind CSS"],
         github: "https://github.com/eduardolluis/rabbit-app",
@@ -226,6 +228,7 @@ export const en = {
     ] as Project[],
   },
   about: {
+    eyebrow: "Profile / Experience",
     title: "A little about me",
     paragraphs: [
       "I'm a Software Engineering student at INTEC and a freelance full-stack developer based in Santo Domingo, Dominican Republic.",
@@ -258,6 +261,8 @@ export const en = {
     ],
   },
   contact: {
+    eyebrow: "Contact / Let's build",
+    online: "Available now",
     title: "Have a project in mind?",
     lead: "Tell me what you're building. I'm open to freelance work, internships, junior software roles and collaborations.",
     copy: "Copy email",

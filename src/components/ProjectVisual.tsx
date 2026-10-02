@@ -43,33 +43,22 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
     );
   }
 
-
   if (type === "rabbit") {
     return (
       <div className="project-cover cover-rabbit">
         <div className="cover-glow" />
         <div className="browser-shot browser-main">
-          <img
-            src="/images/projects/rabbit/home.png"
-            alt="Rabbit e-commerce storefront"
-            loading="lazy"
-            decoding="async"
-          />
+          <img src="/images/projects/rabbit/home.webp" alt="Rabbit e-commerce storefront" loading="lazy" decoding="async" />
         </div>
         <div className="browser-shot rabbit-admin-shot">
-          <img
-            src="/images/projects/rabbit/admin-products.png"
-            alt="Rabbit admin dashboard"
-            loading="lazy"
-            decoding="async"
-          />
+          <img src="/images/projects/rabbit/admin-products.webp" alt="Rabbit admin dashboard" loading="lazy" decoding="async" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="project-cover cover-multistore">
+    <div className="project-cover cover-discord">
       <div className="cover-glow" />
       <div className="browser-shot browser-main">
         <img
@@ -79,7 +68,7 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
           decoding="async"
         />
       </div>
-      <div className="browser-shot rabbit-admin-shot">
+      <div className="browser-shot browser-float">
         <img
           src="https://github.com/user-attachments/assets/b4cff841-570b-4a80-8d2e-678349168e6a"
           alt="Discord Clone voice and video room"

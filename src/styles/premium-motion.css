@@ -1,0 +1,467 @@
+/* Premium motion layer: intentionally visual-only, with reduced-motion fallbacks. */
+:root {
+  --page-scroll: 0;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(34, 211, 238, 0.035), transparent 28%),
+    radial-gradient(circle at 82% 72%, rgba(255, 92, 170, 0.03), transparent 30%);
+  opacity: 0.95;
+}
+
+.grain-layer {
+  position: fixed;
+  inset: -50%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.014;
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0, #fff 1px, transparent 2px, transparent 5px);
+  background-size: 18px 18px;
+  mix-blend-mode: normal;
+}
+
+.ambient-beam {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  width: 55vw;
+  height: 120vh;
+  right: -26vw;
+  top: -15vh;
+  background: linear-gradient(120deg, transparent 20%, rgba(34, 211, 238, 0.065) 48%, rgba(124, 92, 255, 0.035) 58%, transparent 78%);
+  filter: blur(10px);
+  transform: rotate(9deg);
+  opacity: 0.62;
+}
+
+@keyframes ambient-drift {
+  from { opacity: 0.45; }
+  to { opacity: 0.9; }
+}
+
+/* Nav gains a smaller, denser state after the hero starts moving away. */
+.nav {
+  transition:
+    top 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.nav.nav-scrolled {
+  top: 9px;
+  background: rgba(12, 11, 38, 0.79);
+  border-color: rgba(160, 150, 255, 0.3);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28), 0 0 40px rgba(124, 92, 255, 0.08);
+}
+.nav button {
+  position: relative;
+  overflow: hidden;
+}
+.nav button::after {
+  content: "";
+  position: absolute;
+  inset: auto 20% 2px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  transform: scaleX(0);
+  opacity: 0;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+.nav button:hover::after,
+.nav button.active::after {
+  transform: scaleX(1);
+  opacity: 0.8;
+}
+
+/* Hero — animated grid, sweep and floating technology cards around the WebGL object. */
+.hero {
+  isolation: isolate;
+}
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 69% 48%, #000 0, rgba(0,0,0,.85) 28%, transparent 68%);
+  opacity: 0.75;
+  transform: perspective(900px) rotateX(56deg) translateY(18%) scale(1.25);
+  transform-origin: center bottom;
+}
+.hero-sweep {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  left: 53%;
+  top: 13%;
+  width: 36%;
+  height: 72%;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, transparent, rgba(34, 211, 238, 0.11), transparent 20%, rgba(124, 92, 255, 0.08), transparent 46%);
+  opacity: 0.72;
+  transform: rotate(18deg);
+}
+
+
+.hero-copy {
+  position: relative;
+  z-index: 5;
+}
+.name {
+  position: relative;
+  text-shadow: 0 10px 55px rgba(124, 92, 255, 0.14);
+}
+.name::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.17em;
+  width: min(42%, 260px);
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--violet), var(--cyan), transparent);
+  transform-origin: left;
+  animation: name-line 1.1s 1.25s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes name-line { from { transform: scaleX(0); opacity: 0; } }
+
+.hero-showcase {
+  --hero-px: 0;
+  --hero-py: 0;
+  position: absolute;
+  z-index: 4;
+  left: 74%;
+  top: 50%;
+  width: min(39vw, 610px);
+  aspect-ratio: 1;
+  transform: translate3d(calc(-50% + var(--hero-px) * 10px), calc(-50% + var(--hero-py) * 8px), 0);
+  pointer-events: none;
+}
+.hero-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(160, 150, 255, 0.13);
+  transform: translate(-50%, -50%);
+}
+.hero-orbit-one {
+  width: 69%;
+  height: 69%;
+  animation: orbit-breathe 5.2s ease-in-out infinite;
+}
+.hero-orbit-two {
+  width: 88%;
+  height: 88%;
+  border-color: rgba(34, 211, 238, 0.11);
+  animation: orbit-breathe 7s 0.8s ease-in-out infinite reverse;
+}
+.hero-orbit-three {
+  width: 106%;
+  height: 106%;
+  border-style: dashed;
+  border-color: rgba(255, 92, 170, 0.08);
+  animation: orbit-rotate 26s linear infinite;
+}
+.hero-center-pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44%;
+  height: 44%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(124, 92, 255, 0.12), transparent 64%);
+  animation: center-pulse 4.6s ease-in-out infinite;
+}
+@keyframes orbit-breathe {
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.985); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
+}
+@keyframes orbit-rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@keyframes center-pulse {
+  0%, 100% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.94); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.hero-tech-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 150px;
+  padding: 0.72rem 0.9rem;
+  border: 1px solid rgba(160, 150, 255, 0.24);
+  border-radius: 17px;
+  background: linear-gradient(135deg, rgba(18, 17, 49, 0.86), rgba(9, 9, 30, 0.72));
+  backdrop-filter: blur(6px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24), inset 0 1px rgba(255, 255, 255, 0.035);
+  animation: tech-float 5s ease-in-out infinite;
+  transform: translate3d(calc(var(--hero-px) * var(--depth-x, 10px)), calc(var(--hero-py) * var(--depth-y, 7px)), 0);
+}
+.hero-tech-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(34,211,238,.38), transparent 38%, rgba(255,92,170,.2));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.7;
+}
+.hero-tech-card small,
+.hero-tech-card strong {
+  display: block;
+}
+.hero-tech-card small {
+  color: var(--muted);
+  font-size: 0.58rem;
+  line-height: 1;
+  letter-spacing: 0.13em;
+  font-weight: 800;
+}
+.hero-tech-card strong {
+  margin-top: 0.24rem;
+  color: #fff;
+  font-size: 0.88rem;
+  line-height: 1.15;
+}
+.hero-tech-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--cyan);
+  background: rgba(34, 211, 238, 0.09);
+  border: 1px solid rgba(34, 211, 238, 0.17);
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.08);
+}
+.hero-tech-web { left: -2%; top: 12%; --depth-x: -15px; --depth-y: -9px; animation-delay: -0.4s; }
+.hero-tech-mobile { right: -7%; top: 31%; --depth-x: 20px; --depth-y: -7px; animation-delay: -1.9s; }
+.hero-tech-api { left: 2%; bottom: 15%; --depth-x: -20px; --depth-y: 10px; animation-delay: -3s; }
+.hero-tech-data { right: 2%; bottom: 7%; --depth-x: 14px; --depth-y: 13px; animation-delay: -4.1s; }
+@keyframes tech-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+/* Buttons use a travelling highlight instead of only a box-shadow. */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -40%;
+  bottom: -40%;
+  width: 34%;
+  left: -50%;
+  transform: translate3d(0, 0, 0) rotate(18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.btn:hover::before { transform: translate3d(495%, 0, 0) rotate(18deg); }
+
+/* Reveal now feels more cinematic while retaining the same API/classes. */
+.reveal {
+  transform: translateY(30px);
+  transition:
+    opacity 0.58s ease,
+    transform 0.7s cubic-bezier(0.18, 0.82, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  transform: translateY(0);
+  will-change: auto;
+}
+
+/* Section cards get a moving rim and deeper hover without changing layout. */
+.capability-item,
+.panel,
+.project-panel,
+.stat {
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.45s ease,
+    background 0.35s ease;
+}
+.capability-item::before,
+.project-panel::after,
+.stat::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 20%, rgba(34, 211, 238, 0.22), transparent 44%, rgba(255, 92, 170, 0.12), transparent 75%);
+  opacity: 0;
+  transform: translateX(-18%);
+  transition: opacity 0.35s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.capability-item:hover,
+.panel:hover,
+.project-panel:hover,
+.stat:hover {
+  border-color: rgba(34, 211, 238, 0.34);
+  box-shadow: 0 26px 68px rgba(0, 0, 0, 0.25), 0 0 42px rgba(124, 92, 255, 0.06);
+}
+.capability-item:hover::before,
+.project-panel:hover::after,
+.stat:hover::after {
+  opacity: 0.32;
+  transform: translateX(18%);
+}
+.stat { position: relative; overflow: hidden; }
+
+.project-panel {
+  position: relative;
+  overflow: hidden;
+}
+.project-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.065) 48%, transparent 64%);
+  transform: translateX(-120%);
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 5;
+}
+.project-panel:hover .project-cover::after { transform: translateX(120%); }
+.browser-shot,
+.phone-shot,
+.rabbit-admin-shot {
+  transition: transform 0.72s cubic-bezier(0.18, 0.82, 0.2, 1), box-shadow 0.72s ease;
+}
+.project-panel:hover .browser-main {
+  transform: translate3d(-5px, -8px, 52px) scale(1.018);
+  box-shadow: 0 38px 70px -24px rgba(0, 0, 0, 0.9);
+}
+.project-panel:hover .browser-float {
+  transform: rotate(1.5deg) translate3d(7px, -10px, 95px) scale(1.03);
+}
+.project-panel:hover .phone-side {
+  transform: rotate(1.5deg) translate3d(6px, -9px, 95px) scale(1.03);
+}
+.project-panel:hover .phone-primary {
+  transform: rotate(-2deg) translate3d(-7px, -8px, 85px) scale(1.025);
+}
+.project-panel:hover .phone-secondary {
+  transform: rotate(3deg) translate3d(7px, -5px, 105px) scale(1.035);
+}
+.project-panel:hover .rabbit-admin-shot {
+  transform: rotate(0.8deg) translate3d(6px, -8px, 0) scale(1.025);
+}
+.project-index {
+  transition: transform 0.35s ease, color 0.35s ease, text-shadow 0.35s ease;
+}
+.project-panel:hover .project-index {
+  transform: translateY(-3px);
+  color: #fff;
+  text-shadow: 0 0 18px var(--cyan);
+}
+
+/* The modal should arrive like a product showcase, not simply appear. */
+.project-modal {
+  transform-origin: center 45%;
+  animation: modal-enter 0.46s cubic-bezier(0.16, 0.86, 0.22, 1) both;
+}
+@keyframes modal-enter {
+  from { opacity: 0; transform: translateY(18px) scale(0.975); }
+  to { opacity: 1; transform: none; }
+}
+.modal-stage img {
+  animation: gallery-image-in 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes gallery-image-in {
+  from { opacity: 0; transform: scale(0.985) translateY(6px); }
+}
+.gallery-tabs button {
+  transition: color .25s ease, border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.gallery-tabs button:hover { transform: translateY(-2px); }
+
+/* Timeline becomes visibly alive as a user reaches it. */
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 2px;
+  height: calc(100% - 12px);
+  border-radius: 2px;
+  background: linear-gradient(var(--cyan), var(--pink));
+  transform-origin: top;
+  transform: scaleY(var(--page-scroll));
+  opacity: 0.9;
+}
+.timeline li::before {
+  transition: box-shadow .35s ease, border-color .35s ease, transform .35s ease;
+}
+.timeline li:hover::before {
+  transform: scale(1.22);
+  border-color: var(--cyan);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.7);
+}
+
+@media (max-width: 1120px) {
+  .hero-showcase { left: 72%; width: min(43vw, 520px); }
+  .hero-tech-card { min-width: 132px; padding: .64rem .75rem; }
+  .hero-tech-card strong { font-size: .8rem; }
+}
+
+@media (max-width: 900px) {
+  .hero-showcase { display: none; }
+  .hero-grid-overlay { mask-image: radial-gradient(circle at 50% 42%, #000, transparent 72%); }
+  .hero-sweep { left: 44%; width: 58%; opacity: 0.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-beam,
+  .hero-sweep,
+  .hero-orbit,
+  .hero-center-pulse,
+  .hero-tech-card,
+  .name::after,
+  .project-modal,
+  .modal-stage img {
+    animation: none !important;
+  }
+  .reveal {
+    filter: none;
+    transform: none;
+  }
+  .grain-layer,
+  .ambient-beam {
+    transform: none;
+  }
+  .browser-shot,
+  .phone-shot,
+  .rabbit-admin-shot,
+  .project-panel:hover .browser-main,
+  .project-panel:hover .browser-float,
+  .project-panel:hover .phone-side,
+  .project-panel:hover .phone-primary,
+  .project-panel:hover .phone-secondary,
+  .project-panel:hover .rabbit-admin-shot {
+    transform: none !important;
+  }
+}

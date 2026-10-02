@@ -70,12 +70,13 @@ test("Internationalization (EN / ES Parity)", async (t) => {
   );
 
 
-  await t.test("Discord Clone exposes a real project gallery", () => {
+  await t.test("Discord Clone exposes a real project gallery and live demo", () => {
     const discord = en.projects.items.find((project) => project.id === "discord");
     assert.ok(discord);
     assert.ok(discord.gallery.some((shot) => shot.label === "Chat"));
     assert.ok(discord.gallery.some((shot) => shot.label === "Voice & video"));
     assert.match(discord.github ?? "", /discord-clone/);
+    assert.match(discord.live ?? "", /^https:\/\//);
     assert.equal(en.projects.items.some((project) => project.id === "multistore"), false);
   });
 

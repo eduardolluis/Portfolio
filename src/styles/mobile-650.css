@@ -53,7 +53,7 @@
   }
 
   .modal-stage.stage-mobile {
-    width: min(360px, 100%);
+    width: auto;
     height: auto;
     margin-inline: auto;
     padding: 0;
@@ -62,15 +62,9 @@
   }
 
   .gallery-arrow {
+    flex-basis: 40px;
     width: 40px;
     height: 40px;
-  }
-
-  .gallery-prev {
-    left: 0.45rem;
-  }
-  .gallery-next {
-    right: 0.45rem;
   }
 
   .gallery-tabs {
@@ -115,4 +109,3 @@
     min-height: 46px;
   }
 }
-

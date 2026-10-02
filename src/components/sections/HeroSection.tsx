@@ -1,3 +1,4 @@
+import { Code2, Database, Radio, Smartphone } from "lucide-react";
 import { site, type LocaleContent } from "../../data/content";
 
 function AnimatedName() {
@@ -26,6 +27,54 @@ function AnimatedName() {
   );
 }
 
+function HeroShowcase() {
+  return (
+    <div className="hero-showcase" aria-hidden="true">
+      <div className="hero-orbit hero-orbit-one" />
+      <div className="hero-orbit hero-orbit-two" />
+      <div className="hero-orbit hero-orbit-three" />
+      <div className="hero-center-pulse" />
+
+      <div className="hero-tech-card hero-tech-web">
+        <span className="hero-tech-icon">
+          <Code2 size={18} />
+        </span>
+        <span>
+          <small>WEB</small>
+          <strong>Next.js</strong>
+        </span>
+      </div>
+      <div className="hero-tech-card hero-tech-mobile">
+        <span className="hero-tech-icon">
+          <Smartphone size={18} />
+        </span>
+        <span>
+          <small>MOBILE</small>
+          <strong>Flutter</strong>
+        </span>
+      </div>
+      <div className="hero-tech-card hero-tech-api">
+        <span className="hero-tech-icon">
+          <Radio size={18} />
+        </span>
+        <span>
+          <small>BACKEND</small>
+          <strong>NodeJS</strong>
+        </span>
+      </div>
+      <div className="hero-tech-card hero-tech-data">
+        <span className="hero-tech-icon">
+          <Database size={18} />
+        </span>
+        <span>
+          <small>DATA</small>
+          <strong>PostgreSQL</strong>
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function HeroSection({
   t,
   typedText,
@@ -37,6 +86,8 @@ export function HeroSection({
 }) {
   return (
     <section className="hero" id="home">
+      <div className="hero-grid-overlay" aria-hidden="true" />
+      <div className="hero-sweep" aria-hidden="true" />
       <div className="wrap">
         <div className="hero-copy">
           <p className="hello hero-in" style={{ animationDelay: ".1s" }}>
@@ -82,6 +133,7 @@ export function HeroSection({
           </div>
         </div>
       </div>
+      <HeroShowcase />
       <div className="scroll-cue hero-in" style={{ animationDelay: "1.5s" }}>
         <span>{t.hero.scroll}</span>
         <i />

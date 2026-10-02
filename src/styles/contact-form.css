@@ -1,7 +1,7 @@
 /* Contact form */
 .contact-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+  grid-template-columns: minmax(0, 0.97fr) minmax(360px, 1.03fr);
   gap: clamp(2rem, 7vw, 6rem);
   align-items: start;
 }
@@ -14,7 +14,7 @@
   border: 1px solid var(--line);
   border-radius: 26px;
   background: rgba(22, 20, 58, 0.52);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(6px);
   display: grid;
   gap: 1rem;
 }

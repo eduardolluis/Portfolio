@@ -40,6 +40,8 @@ export function PortfolioPage({
     <>
       <div className="progress" aria-hidden="true" />
       <div className="glow" aria-hidden="true" />
+      <div className="ambient-beam" aria-hidden="true" />
+      <div className="grain-layer" aria-hidden="true" />
       <BackgroundScene activeId={activeId} />
 
       <PortfolioNav

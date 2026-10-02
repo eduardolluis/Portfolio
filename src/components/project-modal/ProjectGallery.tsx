@@ -18,9 +18,7 @@ export function ProjectGallery({
   const galleryLength = project.gallery.length;
 
   const showPrevious = () => {
-    setActiveIndex(
-      (current) => (current - 1 + galleryLength) % galleryLength,
-    );
+    setActiveIndex((current) => (current - 1 + galleryLength) % galleryLength);
   };
 
   const showNext = () => {
@@ -29,29 +27,7 @@ export function ProjectGallery({
 
   return (
     <div className="project-modal-visuals">
-      <div
-        id="project-gallery-stage"
-        className={`modal-stage ${active.kind === "mobile" ? "stage-mobile" : "stage-desktop"}`}
-        aria-label={`${labels.gallery}: ${active.label}`}
-        onTouchStart={(event) => {
-          touchStartX.current = event.touches[0]?.clientX ?? null;
-        }}
-        onTouchEnd={(event) => {
-          if (touchStartX.current == null || galleryLength < 2) return;
-          const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
-          const delta = endX - touchStartX.current;
-          touchStartX.current = null;
-          if (Math.abs(delta) < 48) return;
-          if (delta < 0) showNext();
-          else showPrevious();
-        }}
-      >
-        <img
-          src={active.src}
-          alt={active.alt}
-          decoding="async"
-          draggable={false}
-        />
+      <div className="gallery-stage-row">
         {galleryLength > 1 ? (
           <>
             <button
@@ -62,6 +38,35 @@ export function ProjectGallery({
             >
               ←
             </button>
+          </>
+        ) : null}
+        <div
+          id="project-gallery-stage"
+          className={`modal-stage ${active.kind === "mobile" ? "stage-mobile" : "stage-desktop"}`}
+          aria-label={`${labels.gallery}: ${active.label}`}
+          onTouchStart={(event) => {
+            touchStartX.current = event.touches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(event) => {
+            if (touchStartX.current == null || galleryLength < 2) return;
+            const endX =
+              event.changedTouches[0]?.clientX ?? touchStartX.current;
+            const delta = endX - touchStartX.current;
+            touchStartX.current = null;
+            if (Math.abs(delta) < 48) return;
+            if (delta < 0) showNext();
+            else showPrevious();
+          }}
+        >
+          <img
+            src={active.src}
+            alt={active.alt}
+            decoding="async"
+            draggable={false}
+          />
+        </div>
+        {galleryLength > 1 ? (
+          <>
             <button
               className="gallery-arrow gallery-next"
               type="button"
