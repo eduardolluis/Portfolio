@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://portfolio-one-blue-anckqnppbh.vercel.app/sitemap.xml
+Sitemap: https://eduardo-portfolio-neon-two.vercel.app/sitemap.xml
