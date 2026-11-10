@@ -61,7 +61,7 @@ export const en = {
   projects: {
     eyebrow: "Case studies / Selected builds",
     title: "Selected work",
-    lead: "Six projects that show how I work across business software, mobile products, real-time systems and e-commerce.",
+    lead: "Five projects that show how I work across business software, mobile products, real-time systems and e-commerce.",
     viewCode: "View source",
     viewLive: "Live demo",
     caseStudy: "Case study",
@@ -75,33 +75,6 @@ export const en = {
     proof: "Project facts",
     repository: "Repository",
     items: [
-      {
-        id: "miga",
-        title: "Miga — Meal Planner",
-        category: "Independent product · iOS app",
-        description: "A budget-aware meal planner that brings recipes, weekly menus and grocery lists into one Flutter experience, with Supabase authentication and RevenueCat Pro subscriptions.",
-        highlights: [
-          "Weekly meal planning, recipe discovery and automatically organized shopping lists",
-          "Budget-friendly recipe discovery and personalized meal-planning flows",
-          "Google, Apple and email-code sign-in with Supabase; Pro subscriptions through RevenueCat",
-          "Automated iOS/TestFlight builds with Codemagic and submission for App Store review",
-        ],
-        facts: [
-          { label: "Platforms", value: "Flutter / iOS" },
-          { label: "Business model", value: "Freemium + Pro" },
-          { label: "Release process", value: "TestFlight & App Store review" },
-        ],
-        role: "Product design and end-to-end mobile engineering: Flutter UI, recipes and meal-planning flows, authentication, subscription integration, build automation and App Store submission.",
-        repositoryNote: "Private product source. App Store submission has been made; public store listing not yet confirmed.",
-        gallery: [
-          { src: "/images/projects/miga/plan.svg", alt: "Illustrative Miga weekly meal planning concept; not an app screenshot", label: "Planning concept", kind: "desktop" },
-          { src: "/images/projects/miga/grocery.svg", alt: "Illustrative Miga grocery list concept; not an app screenshot", label: "Grocery concept", kind: "desktop" },
-        ],
-        previewNote: "Illustrative portfolio concepts, not screenshots from the live app.",
-        stack: ["Flutter", "Dart", "Supabase", "RevenueCat", "Codemagic", "iOS"],
-        caseStudy: "/miga/",
-        visual: "miga",
-      },
       {
         id: "gio",
         title: "GIO Workspace",
