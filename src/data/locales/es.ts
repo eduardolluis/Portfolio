@@ -107,7 +107,8 @@ export const es = {
           { src: "/images/projects/miga/subscription.webp", alt: "Herramientas de suscripción Miga Pro", label: "Pro", kind: "mobile" },
         ],
         stack: ["Flutter", "Dart", "Supabase", "RevenueCat", "Codemagic", "iOS"],
-        caseStudy: "/miga/",
+        live: "https://miga-landing-rho.vercel.app/",
+        liveLabel: "Visitar sitio de Miga",
         visual: "miga",
       },
       {

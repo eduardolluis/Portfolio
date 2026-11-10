@@ -31,7 +31,7 @@ export function ProjectModal({
   useEffect(() => {
     if (!project || project.gallery.length === 0) return;
 
-    setActiveIndex(0);
+    setActiveIndex(project.id === "miga" ? 1 : 0);
     const resetFrame = requestAnimationFrame(() => {
       if (scrollRef.current) scrollRef.current.scrollTop = 0;
     });
@@ -135,7 +135,7 @@ export function ProjectModal({
     >
       <section
         ref={dialogRef}
-        className="project-modal"
+        className={`project-modal${project.id === "miga" ? " is-miga" : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-modal-title"

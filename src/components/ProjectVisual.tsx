@@ -4,24 +4,28 @@ export function ProjectVisual({ type }: { type: Project["visual"] }) {
   if (type === "miga") {
     return (
       <div className="project-cover cover-miga">
-        <div className="cover-glow" />
-        <span className="miga-cover-brand" aria-hidden="true">
-          miga <small>MEAL PLANNER</small>
-        </span>
-        <img
-          className="miga-cover-screen miga-cover-screen-back"
-          src="/images/projects/miga/recipes.webp"
-          alt="Miga recipe catalog"
-          loading="lazy"
-          decoding="async"
-        />
-        <img
-          className="miga-cover-screen miga-cover-screen-front"
-          src="/images/projects/miga/home.webp"
-          alt="Miga home screen"
-          loading="lazy"
-          decoding="async"
-        />
+        <div className="miga-featured-copy">
+          <span className="miga-featured-label">MOBILE PRODUCT · iOS</span>
+          <span className="miga-featured-name">miga<span>.</span></span>
+          <span className="miga-featured-slogan">Plan, cook &amp; save.</span>
+          <span className="miga-featured-caption">Real app. Real screens.</span>
+        </div>
+        <div className="miga-featured-phones">
+          <img
+            className="miga-featured-phone miga-featured-phone-home"
+            src="/images/projects/miga/home.webp"
+            alt="Actual Miga iPhone home screen"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            className="miga-featured-phone miga-featured-phone-recipes"
+            src="/images/projects/miga/recipes.webp"
+            alt="Actual Miga iPhone recipe screen"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
     );
   }

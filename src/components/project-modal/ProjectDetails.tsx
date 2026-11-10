@@ -78,7 +78,7 @@ export function ProjectDetails({
             target="_blank"
             rel="noopener noreferrer"
           >
-            {labels.viewLive}
+            {project.liveLabel || labels.viewLive}
           </a>
         ) : null}
         {project.github ? (

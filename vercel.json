@@ -44,5 +44,17 @@
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/miga",
+      "destination": "https://miga-landing-rho.vercel.app/",
+      "permanent": true
+    },
+    {
+      "source": "/miga/",
+      "destination": "https://miga-landing-rho.vercel.app/",
+      "permanent": true
+    }
   ]
 }

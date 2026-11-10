@@ -34,14 +34,23 @@ test("Internationalization (EN / ES Parity)", async (t) => {
     }
   });
 
-  await t.test("Both locales have 5 projects with verified data", () => {
-    assert.equal(en.projects.items.length, 5);
-    assert.equal(es.projects.items.length, 5);
-    for (let i = 0; i < 5; i += 1) {
+  await t.test("Both locales have 6 projects with verified data", () => {
+    assert.equal(en.projects.items.length, 6);
+    assert.equal(es.projects.items.length, 6);
+    for (let i = 0; i < 6; i += 1) {
       assert.equal(en.projects.items[i].id, es.projects.items[i].id);
       assert.ok(en.projects.items[i].gallery.length >= 2);
       assert.ok(es.projects.items[i].gallery.length >= 2);
     }
+  });
+
+  await t.test("Miga uses the real product landing and 10 iPhone screenshots", () => {
+    const miga = en.projects.items[0];
+    assert.equal(miga.id, "miga");
+    assert.equal(miga.live, "https://miga-landing-rho.vercel.app/");
+    assert.equal(miga.caseStudy, undefined);
+    assert.equal(miga.gallery.length, 10);
+    assert.ok(miga.gallery.every((shot) => shot.kind === "mobile"));
   });
 
   await t.test(

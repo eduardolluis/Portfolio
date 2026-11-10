@@ -15,6 +15,7 @@ export type Project = {
   stack: string[];
   github?: string;
   live?: string;
+  liveLabel?: string;
   caseStudy?: string;
   visual: "miga" | "gio" | "melodix" | "whatzapp" | "discord" | "rabbit";
   disclaimer?: string;

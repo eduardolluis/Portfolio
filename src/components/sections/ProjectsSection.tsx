@@ -78,7 +78,7 @@ export function ProjectsSection({
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {t.projects.viewLive}
+                        {project.liveLabel || t.projects.viewLive}
                       </a>
                     ) : null}
                     {project.github ? (

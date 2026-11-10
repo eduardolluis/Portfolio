@@ -1,0 +1,237 @@
+/* Miga-only portfolio design. Keep all other project cards and modals unchanged. */
+.cover-miga {
+  background: radial-gradient(ellipse at 72% 23%, #e2ecd3 0%, transparent 50%), #f7f3e8;
+  color: #28382a;
+  display: flex;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cover-miga::before { opacity: .04; }
+.miga-featured-copy {
+  position: absolute;
+  z-index: 3;
+  left: 7%;
+  top: 19%;
+  width: 38%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.miga-featured-label {
+  font: 700 clamp(.56rem,.8vw,.77rem)/1.35 system-ui,sans-serif;
+  letter-spacing: .12em;
+  color: #467846;
+}
+.miga-featured-name {
+  margin-top: .25em;
+  font: 500 clamp(2.4rem,5.1vw,5.8rem)/1 Georgia,"Times New Roman",serif;
+  letter-spacing: -.082em;
+}
+.miga-featured-name span { color: #3a854a; }
+.miga-featured-slogan {
+  margin-top: 1.05rem;
+  font: 600 clamp(.95rem,1.65vw,1.7rem)/1.25 Georgia,"Times New Roman",serif;
+}
+.miga-featured-caption {
+  margin-top: .9rem;
+  padding: .43rem .72rem;
+  font: 700 clamp(.57rem,.8vw,.75rem)/1.1 system-ui,sans-serif;
+  letter-spacing: .02em;
+  color: #38723e;
+  border: 1px solid #cadcc4;
+  background: #e5eddb;
+  border-radius: 100px;
+}
+.miga-featured-phones {
+  position: absolute;
+  z-index: 2;
+  inset: 6% 5% 4% 43%;
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px,2.2vw,25px);
+  align-items: flex-end;
+}
+.miga-featured-phone {
+  width: auto;
+  height: 94%;
+  max-width: calc(50% - 8px);
+  display: block;
+  object-fit: contain;
+  border-radius: 15px;
+  box-shadow: 0 18px 42px rgba(36,52,32,.18);
+  border: 2px solid rgba(36,52,32,.12);
+  background: #f8f4e9;
+}
+.miga-featured-phone-recipes { height: 84%; }
+.project-panel:hover .miga-featured-phone { transform: none; }
+
+/* iPhone screenshots in the modal should fit INSIDE the viewport, not fill the column. */
+.project-modal.is-miga {
+  --miga-ink:#263526;
+  --miga-green:#327a3d;
+  --miga-muted:#5e6b5e;
+  --miga-line:#d7dfcf;
+  width: min(1060px,calc(100% - 1rem));
+  max-height: min(92vh,880px);
+  background: #f8f5eb;
+  border: 1px solid #cbd9c3;
+  box-shadow: 0 35px 110px rgba(0,0,0,.5);
+  color: var(--miga-ink);
+}
+.project-modal.is-miga .project-modal-topbar {
+  background: #f8f5eb;
+  border-bottom: 1px solid var(--miga-line);
+  padding: 1rem 1.5rem;
+}
+.project-modal.is-miga .project-modal-category,
+.project-modal.is-miga .modal-section-label { color: var(--miga-green); }
+.project-modal.is-miga .project-modal-topbar h2 { color: var(--miga-ink); }
+.project-modal.is-miga .modal-close {
+  background: #e8efdf;
+  color: var(--miga-ink);
+  border: 1px solid var(--miga-line);
+}
+.project-modal.is-miga .modal-close:hover { background: #d8e8d0; color: var(--miga-green); }
+.project-modal.is-miga .project-modal-layout {
+  grid-template-columns: minmax(0,1fr) minmax(0,.94fr);
+  gap: clamp(20px,3vw,38px);
+  padding: 1.25rem 1.5rem 1.6rem;
+}
+.project-modal.is-miga .project-modal-visuals { min-width:0; }
+.project-modal.is-miga .gallery-stage-row {
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  gap: 12px;
+}
+.project-modal.is-miga .modal-stage.stage-mobile {
+  flex: 0 1 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: min(280px,calc(100% - 104px));
+  height: min(55vh,530px);
+  max-height: 530px;
+  min-height:0;
+  padding: 0;
+  margin:0;
+  overflow:visible;
+  background:transparent;
+  border:0;
+  border-radius:0;
+}
+.project-modal.is-miga .modal-stage.stage-mobile img {
+  display:block;
+  width:auto;
+  height:100%;
+  max-height:100%;
+  max-width:100%;
+  object-fit:contain;
+  border: 1px solid #d7dfcf;
+  border-radius: 18px;
+  background:#f8f5eb;
+  box-shadow: 0 15px 35px rgba(36,58,34,.16);
+}
+.project-modal.is-miga .gallery-arrow {
+  background:#e7eee0;
+  border:1px solid #cbd9c3;
+  color:#2f703c;
+  box-shadow:none;
+  flex:0 0 40px;
+  width:40px;
+  height:40px;
+}
+.project-modal.is-miga .gallery-arrow:hover {
+  color:#fff;
+  background:#347d40;
+  border-color:#347d40;
+}
+.project-modal.is-miga .gallery-tabs {
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  scrollbar-width:thin;
+  gap:7px;
+  padding: 8px 0 12px;
+  margin-top: 8px;
+}
+.project-modal.is-miga .gallery-tabs button {
+  flex:0 0 auto;
+  border-color:#cfdccc;
+  background:#fffdf7;
+  color:#586957;
+  font-size:.76rem;
+  padding:.45rem .65rem;
+}
+.project-modal.is-miga .gallery-tabs button.active {
+  background:#337c41;
+  border-color:#337c41;
+  color:#fff;
+}
+.project-modal.is-miga .gallery-origin-note {
+  color:#687569;
+  text-align:center;
+  font-size:.73rem;
+  line-height:1.4;
+  margin:.4rem auto 0;
+}
+.project-modal.is-miga .modal-description,
+.project-modal.is-miga .modal-role,
+.project-modal.is-miga .repository-note,
+.project-modal.is-miga .modal-highlights li,
+.project-modal.is-miga .project-fact span { color:var(--miga-muted); }
+.project-modal.is-miga .project-facts { gap: 8px; }
+.project-modal.is-miga .project-fact {
+  border-color:#d7dfcf;
+  background:#eef2e7;
+  padding:.72rem;
+}
+.project-modal.is-miga .project-fact strong { color:var(--miga-ink); }
+.project-modal.is-miga .modal-highlights li::before {
+  background:#327a3d;
+  box-shadow:none;
+}
+.project-modal.is-miga .modal-detail-block { margin-top:1.25rem; }
+.project-modal.is-miga .modal-highlights { gap:.52rem; }
+.project-modal.is-miga .chips span {
+  color:#3f6741;
+  border-color:#cbdac2;
+  background:#e9efdf;
+}
+.project-modal.is-miga .repository-note { border-left-color:#6ba36e; }
+.project-modal.is-miga .modal-links .btn {
+  color:#28733d;
+  border-color:#8cb793;
+}
+.project-modal.is-miga .modal-links .btn:hover { color:#fff; background:#28733d; }
+.project-modal.is-miga .modal-links .btn.primary {
+  color:#fff;
+  background:#307b40;
+  border-color:#307b40;
+}
+.project-modal.is-miga .modal-links .btn.primary:hover { background:#235c2e; }
+@media (max-width: 760px) {
+ .project-modal.is-miga { width:100%; height:100dvh; max-height:100dvh; border-radius:0; border:0; }
+ .project-modal.is-miga .project-modal-topbar { padding:.9rem 1rem; }
+ .project-modal.is-miga .project-modal-layout { display:flex; flex-direction:column; gap:16px; padding:1rem 1rem 2rem; }
+ .project-modal.is-miga .modal-stage.stage-mobile {
+   width:min(215px,calc(100% - 105px)); height:min(44svh,410px); max-height:410px; margin:0;
+ }
+ .project-modal.is-miga .gallery-arrow { flex-basis:38px; width:38px; height:38px; }
+ .project-modal.is-miga .gallery-tabs { margin-top:.55rem; }
+ .project-modal.is-miga .project-facts { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .project-modal.is-miga .project-modal-copy { padding:0 0 .5rem; }
+ .project-modal.is-miga .modal-links { margin-top:1rem; }
+ .cover-miga .miga-featured-copy { left:7%; top:12%; width:43%; }
+ .cover-miga .miga-featured-name { font-size:clamp(2.4rem,9vw,4rem); }
+ .cover-miga .miga-featured-slogan { font-size:clamp(.92rem,3.6vw,1.3rem); }
+ .cover-miga .miga-featured-label { font-size:.55rem; }
+ .cover-miga .miga-featured-caption { font-size:.54rem; }
+ .cover-miga .miga-featured-phones { inset:8% 4% 4% 45%; gap:8px; }
+}
+@media (max-width: 390px) {
+ .cover-miga .miga-featured-phone-recipes {display:none;}
+ .cover-miga .miga-featured-phones {inset:8% 4% 4% 49%; justify-content:center;}
+ .cover-miga .miga-featured-phone-home {max-width:100%;}
+ .project-modal.is-miga .project-facts {grid-template-columns:1fr;}
+}

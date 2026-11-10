@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BackgroundScene } from "./components/BackgroundScene";
 import { PortfolioPage } from "./components/PortfolioPage";
-import { MigaCaseStudy } from "./components/MigaCaseStudy";
 import { content, type Lang } from "./data/content";
 import { usePortfolioEffects } from "./hooks/usePortfolioEffects";
 import "./styles.css";
@@ -12,7 +11,6 @@ function App() {
     return saved === "es" || saved === "en" ? saved : "en";
   });
   const t = content[lang];
-  const isMigaCaseStudy = ["/miga", "/miga/"].includes(window.location.pathname);
   const { activeId, marqueeItems, scrollTo, typedText } = usePortfolioEffects(
     lang,
     t.hero.roles,
@@ -21,16 +19,12 @@ function App() {
   useEffect(() => {
     localStorage.setItem("portfolio-language", lang);
     document.documentElement.lang = lang;
-    const title = isMigaCaseStudy
-      ? "Miga — Meal Planner | Eduardo De La Cruz"
-      : lang === "en"
-        ? "Eduardo De La Cruz | Full-Stack Software Developer"
-        : "Eduardo De La Cruz | Desarrollador de Software Full-Stack";
-    const description = isMigaCaseStudy
-      ? "Miga: a Flutter meal planner featuring recipe discovery, randomized weekly plans, grocery lists and budget tools. Case study by Eduardo De La Cruz."
-      : lang === "en"
-        ? "Portfolio of Eduardo De La Cruz, a full-stack software developer building web apps, mobile apps and business systems."
-        : "Portfolio de Eduardo De La Cruz, desarrollador full-stack de aplicaciones web, apps móviles y sistemas para negocios.";
+    const title = lang === "en"
+      ? "Eduardo De La Cruz | Full-Stack Software Developer"
+      : "Eduardo De La Cruz | Desarrollador de Software Full-Stack";
+    const description = lang === "en"
+      ? "Portfolio of Eduardo De La Cruz, a full-stack software developer building web apps, mobile apps and business systems."
+      : "Portfolio de Eduardo De La Cruz, desarrollador full-stack de aplicaciones web, apps móviles y sistemas para negocios.";
     document.title = title;
     document
       .querySelector<HTMLMetaElement>('meta[name="description"]')
@@ -41,16 +35,7 @@ function App() {
     document
       .querySelector<HTMLMetaElement>('meta[property="og:description"]')
       ?.setAttribute("content", description);
-  }, [lang, isMigaCaseStudy]);
-
-  if (isMigaCaseStudy) {
-    return (
-      <MigaCaseStudy
-        lang={lang}
-        onToggleLanguage={() => setLang((current) => (current === "en" ? "es" : "en"))}
-      />
-    );
-  }
+  }, [lang]);
 
   if (
     window.location.pathname !== "/" &&
