@@ -1,6 +1,31 @@
 import type { Project } from "../data/content";
 
 export function ProjectVisual({ type }: { type: Project["visual"] }) {
+  if (type === "miga") {
+    return (
+      <div className="project-cover cover-miga">
+        <div className="cover-glow" />
+        <span className="miga-cover-brand" aria-hidden="true">
+          miga <small>MEAL PLANNER</small>
+        </span>
+        <img
+          className="miga-cover-screen miga-cover-screen-back"
+          src="/images/projects/miga/recipes.webp"
+          alt="Miga recipe catalog"
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          className="miga-cover-screen miga-cover-screen-front"
+          src="/images/projects/miga/home.webp"
+          alt="Miga home screen"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    );
+  }
+
   if (type === "gio") {
     return (
       <div className="project-cover cover-gio">

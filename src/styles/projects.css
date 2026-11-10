@@ -184,3 +184,52 @@
   text-decoration: none;
 }
 
+
+
+/* Miga: authentic cream-and-green mobile product photography/screens */
+.cover-miga {
+  background: radial-gradient(circle at 90% 10%, #e1ebd0, transparent 43%), #f7f3e7;
+  color: #273427;
+}
+.cover-miga .cover-glow {
+  background: radial-gradient(circle at 18% 80%, rgba(143, 185, 126, .38), transparent 46%);
+  opacity: 1;
+}
+.miga-cover-brand {
+  position: absolute;
+  left: 8%;
+  top: 10%;
+  z-index: 3;
+  font-size: clamp(1.5rem, 2.7vw, 2.5rem);
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.07em;
+  color: #263527;
+}
+.miga-cover-brand small {
+  display: block;
+  margin-top: .2rem;
+  font-family: system-ui, sans-serif;
+  font-size: .52rem;
+  letter-spacing: .23em;
+  font-weight: 800;
+}
+.miga-cover-screen {
+  position: absolute;
+  z-index: 2;
+  width: 31%;
+  height: 82%;
+  object-fit: contain;
+  top: 10%;
+  border-radius: 12px;
+  box-shadow: 0 20px 35px rgba(19, 30, 17, .22);
+  background: #f7f3e7;
+}
+.miga-cover-screen-back {
+  left: 35%;
+  transform: rotate(-10deg) translateY(7%);
+  opacity: .88;
+}
+.miga-cover-screen-front {
+  left: 56%;
+  transform: rotate(6deg);
+}
