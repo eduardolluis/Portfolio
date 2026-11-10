@@ -16,7 +16,7 @@ export type Project = {
   github?: string;
   live?: string;
   caseStudy?: string;
-  visual: "gio" | "melodix" | "whatzapp" | "discord" | "rabbit";
+  visual: "miga" | "gio" | "melodix" | "whatzapp" | "discord" | "rabbit";
   disclaimer?: string;
   facts?: ProjectFact[];
   role?: string;

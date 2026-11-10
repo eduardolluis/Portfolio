@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miga | Meal Planner — Eduardo De La Cruz</title>
+<meta name="description" content="Miga, a budget-aware Flutter meal planner. Product case study by Eduardo De La Cruz.">
+<meta name="theme-color" content="#211328">
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Arial,sans-serif;color:#fdf8fd;background:#18101e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#572b54 0,transparent 42%),#18101e;color:#fff5fb}
+a{color:inherit}button{font:inherit;cursor:pointer}.wrap{width:min(1100px,calc(100% - 40px));margin:auto}
+nav{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff24}
+.back{text-decoration:none;font-weight:750}.back:hover{text-decoration:underline}
+.lang{border:1px solid #ffffff5e;border-radius:30px;background:#ffffff12;color:white;padding:9px 15px;font-weight:800}
+.hero{padding:90px 0 52px;display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;color:#ff9fae;font-size:12px;font-weight:800}
+h1{font-size:clamp(60px,8vw,116px);line-height:1;letter-spacing:-.085em;margin:20px 0 10px}
+h2{font-size:clamp(26px,3.5vw,42px);letter-spacing:-.04em;margin:0 0 20px}
+.lead{font-size:clamp(19px,2.1vw,25px);line-height:1.5;color:#e8d3e5;max-width:650px}
+.hero img{width:100%;height:auto;border-radius:25px;box-shadow:0 30px 60px #06020855}
+.tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px}.tags span{border:1px solid #fff4;padding:8px 14px;border-radius:99px;background:#fff1;color:#ffe3ef;font-size:13px;font-weight:650}
+.status{display:inline-flex;border-radius:99px;background:#ff74862b;border:1px solid #ff819b70;color:#ffc4cd;padding:9px 15px;font-size:13px;margin:12px 0;font-weight:700}
+section{padding:50px 0;border-top:1px solid #fff2}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.panel{border:1px solid #ffffff29;background:#ffffff0b;padding:26px;border-radius:22px}
+.panel h3{margin:0 0 14px;font-size:21px}.panel p{line-height:1.7;color:#ddc9d8;margin:0}
+.preview{width:100%;border-radius:24px;border:1px solid #ffffff30}.note{color:#bba5b5;font-size:13px}
+footer{padding:35px 0 60px;color:#c2aabf}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:55px}.grid{grid-template-columns:1fr}.wrap{width:min(100% - 28px,1100px)}nav{height:70px}}
+</style>
+</head>
+<body>
+<nav class="wrap"><a class="back" href="/" data-en="← Back to portfolio" data-es="← Volver al portafolio">← Back to portfolio</a><button id="lang" class="lang" type="button" aria-label="Switch language">ES</button></nav>
+<main class="wrap">
+<header class="hero"><div><span class="eyebrow" data-en="Independent mobile product · Case study" data-es="Producto móvil independiente · Caso de estudio">Independent mobile product · Case study</span><h1>Miga<span style="color:#ff7288">.</span></h1><p class="lead" data-en="A meal planner designed to make recipes, weekly menus and grocery shopping feel effortless — while keeping budgets in mind." data-es="Una app de planificación de comidas que conecta recetas, menús semanales y compras, con el presupuesto siempre presente.">A meal planner designed to make recipes, weekly menus and grocery shopping feel effortless — while keeping budgets in mind.</p><p class="status" data-en="iOS: Submitted for App Store review" data-es="iOS: Enviada a revisión de App Store">iOS: Submitted for App Store review</p><div class="tags"><span>Flutter</span><span>Dart</span><span>Supabase</span><span>RevenueCat</span><span>Codemagic</span></div></div><div><img src="/images/projects/miga/plan.svg" alt="Illustrative Miga meal planning concept"></div></header>
+<section><span class="eyebrow" data-en="The product" data-es="El producto">The product</span><h2 data-en="Plan smarter. Shop with purpose." data-es="Planifica mejor. Compra con propósito.">Plan smarter. Shop with purpose.</h2><div class="grid"><div class="panel"><h3 data-en="Meal planning" data-es="Plan semanal">Meal planning</h3><p data-en="Organize meals across the week, discover recipe ideas and decide what to cook." data-es="Organiza comidas durante la semana, descubre recetas y decide qué cocinar.">Organize meals across the week, discover recipe ideas and decide what to cook.</p></div><div class="panel"><h3 data-en="Grocery lists" data-es="Listas de compras">Grocery lists</h3><p data-en="Keep ingredients connected to meal plans so shopping is simpler and more organized." data-es="Conecta ingredientes y menús para organizar las compras de forma sencilla.">Keep ingredients connected to meal plans so shopping is simpler and more organized.</p></div><div class="panel"><h3 data-en="Freemium + Pro" data-es="Freemium + Pro">Freemium + Pro</h3><p data-en="Combine free planning tools with subscription features using RevenueCat." data-es="Combina herramientas gratuitas con funciones de suscripción mediante RevenueCat.">Combine free planning tools with subscription features using RevenueCat.</p></div></div></section>
+<section><span class="eyebrow" data-en="Engineering & delivery" data-es="Ingeniería y lanzamiento">Engineering & delivery</span><h2 data-en="Built end to end" data-es="Desarrollo de principio a fin">Built end to end</h2><div class="grid"><div class="panel"><h3 data-en="Mobile experience" data-es="Experiencia móvil">Mobile experience</h3><p data-en="Flutter UI, recipe discovery, weekly planning and shopping list workflows." data-es="Interfaz Flutter, recetas, planificación semanal y flujos de compras.">Flutter UI, recipe discovery, weekly planning and shopping list workflows.</p></div><div class="panel"><h3 data-en="Identity & billing" data-es="Autenticación y cobros">Identity & billing</h3><p data-en="Supabase login with Google, Apple and email codes; Pro purchase flows through RevenueCat." data-es="Acceso con Google, Apple y código por correo en Supabase; compras Pro mediante RevenueCat.">Supabase login with Google, Apple and email codes; Pro purchase flows through RevenueCat.</p></div><div class="panel"><h3 data-en="iOS release pipeline" data-es="Publicación en iOS">iOS release pipeline</h3><p data-en="Codemagic builds and TestFlight delivery, followed by App Store submission." data-es="Builds con Codemagic y distribución TestFlight, seguidos del envío a App Store.">Codemagic builds and TestFlight delivery, followed by App Store submission.</p></div></div></section>
+<section><span class="eyebrow" data-en="Product concept" data-es="Concepto visual">Product concept</span><h2 data-en="Planning meets shopping" data-es="Del menú a las compras">Planning meets shopping</h2><img class="preview" src="/images/projects/miga/grocery.svg" alt="Illustrative grocery organization screen concept"><p class="note" data-en="Concept illustrations for this portfolio, not screenshots of the current app." data-es="Ilustraciones conceptuales para este portafolio; no son capturas de la app actual.">Concept illustrations for this portfolio, not screenshots of the current app.</p></section>
+</main><footer class="wrap"><a href="/">Eduardo De La Cruz · Portfolio</a></footer>
+<script>const button=document.getElementById('lang');let lang='en';button.addEventListener('click',()=>{lang=lang==='en'?'es':'en';document.documentElement.lang=lang;button.textContent=lang==='en'?'ES':'EN';document.querySelectorAll('[data-en][data-es]').forEach(el=>{el.textContent=el.dataset[lang]})});</script>
+</body></html>
