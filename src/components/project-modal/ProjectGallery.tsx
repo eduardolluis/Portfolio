@@ -78,6 +78,12 @@ export function ProjectGallery({
           </>
         ) : null}
       </div>
+      {project.id === "miga" ? (
+        <div className="miga-gallery-progress" aria-live="polite">
+          <span>{String(activeIndex + 1).padStart(2, "0")} / {String(galleryLength).padStart(2, "0")}</span>
+          <strong>{active.label}</strong>
+        </div>
+      ) : null}
       <div className="gallery-tabs" role="tablist" aria-label={labels.gallery}>
         {project.gallery.map((item, index) => (
           <button

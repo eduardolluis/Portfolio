@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Project } from "../data/content";
 import { ProjectDetails } from "./project-modal/ProjectDetails";
 import { ProjectGallery } from "./project-modal/ProjectGallery";
+import { MigaModalContent } from "./project-modal/MigaModalContent";
 import type { ProjectModalLabels } from "./project-modal/types";
 
 const focusableSelector = [
@@ -157,15 +158,24 @@ export function ProjectModal({
         </div>
 
         <div className="project-modal-scroll" ref={scrollRef}>
-          <div className="project-modal-layout">
-            <ProjectGallery
+          {project.id === "miga" ? (
+            <MigaModalContent
               project={project}
               labels={labels}
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
             />
-            <ProjectDetails project={project} labels={labels} />
-          </div>
+          ) : (
+            <div className="project-modal-layout">
+              <ProjectGallery
+                project={project}
+                labels={labels}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+              />
+              <ProjectDetails project={project} labels={labels} />
+            </div>
+          )}
         </div>
       </section>
     </div>
